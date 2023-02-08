@@ -27,7 +27,7 @@ public:
     virtual void addMonster(Monster* m);
     virtual void addItem(Item* i);
 
-    virtual void startFight(Monster* m1, Monster* m2);
+    virtual void startFight(Team* m1, Team* m2);
     virtual void startSummoning(int count);
 
     ~Game();

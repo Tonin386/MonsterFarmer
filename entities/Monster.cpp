@@ -19,6 +19,8 @@ Monster::Monster()
     _ring1 = new Item();
     _ring2 = new Item();
     _talisman = new Item();
+
+    _team = 0;
 }
 
 Monster::Monster(double atk, double mh, double speed, double ms, double s, string n, int r)
@@ -31,6 +33,8 @@ Monster::Monster(double atk, double mh, double speed, double ms, double s, strin
     _ring1 = new Item();
     _ring2 = new Item();
     _talisman = new Item();
+
+    _team = 0;
 }
 
 void Monster::attack(Monster *target, double bonusStam)
@@ -177,6 +181,31 @@ string Monster::getRarity() const
     }
 
     return "Error";
+}
+
+int Monster::getTeam() const
+{
+    return _team;
+}
+
+void Monster::setTeam(int t)
+{
+    _team = t;
+}
+
+bool Monster::operator==(Monster const &m) const
+{
+    return _name == m.getName();
+}
+
+bool Monster::operator<(Monster const &m) const
+{
+    return _stamina < m.getStamina();
+}
+
+bool Monster::operator>(Monster const &m) const
+{
+    return _stamina > m.getStamina();
 }
 
 Monster::~Monster()

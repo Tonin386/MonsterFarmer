@@ -1,16 +1,18 @@
 #ifndef FIGHT_HPP
 #define FIGHT_HPP
 
-#include "../entities/Monster.hpp"
+#include "../entities/Team.hpp"
+#include <algorithm>
 
 class Fight
 {
 protected:
     int _turnCount;
-    Monster* _m1;
-    Monster* _m2;
+    Team* _attackers;
+    Team* _defenders;
+    std::vector<Monster*> _all;
 public:
-    Fight(Monster* m1, Monster* m2);
+    Fight(Team* a, Team* d);
 
     virtual bool playTurn();
 

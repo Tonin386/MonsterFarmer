@@ -22,6 +22,8 @@ protected:
     Item* _ring2;
     Item* _talisman;
 
+    int _team;
+
 public:
     Monster();
     Monster(double atk, double mh, double speed, double ms, double s, std::string n, int r);
@@ -59,6 +61,14 @@ public:
     virtual double      getSpeed()      const;
     virtual std::string getName()       const;
     virtual std::string getRarity()     const;
+    virtual int         getTeam()       const;
+
+    virtual void setTeam(int t);
+
+    /* OPERATORS */
+    virtual bool operator==(Monster const &m) const;
+    virtual bool operator<(Monster const &m) const;
+    virtual bool operator>(Monster const &m) const;
 
     ~Monster();
 };

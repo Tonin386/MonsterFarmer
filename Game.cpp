@@ -32,16 +32,17 @@ void Game::addItem(Item *i)
     _items.push_back(i);
 }
 
-void Game::startFight(Monster *m1, Monster *m2)
+void Game::startFight(Team *attackers, Team *defenders)
 {
-    Fight *f = new Fight(m1, m2);
+    Fight *f = new Fight(attackers, defenders);
     _fights.push_back(f);
 
     console.log("New fight has started between two monsters.");
 
     while (f->playTurn())
     {
-        console.log("Monster1 HP:" + to_string(m1->getHp()) + " Stam: " + to_string(m1->getStamina()) + "/" + to_string(m1->getMaxStamina()) + " | Monster2 HP: " + to_string(m2->getHp())  + " Stam: " + to_string(m2->getStamina()) + "/" + to_string(m2->getMaxStamina()));
+        int i = 0;
+        //console.log("Monster1 HP:" + to_string(m1->getHp()) + " Stam: " + to_string(m1->getStamina()) + "/" + to_string(m1->getMaxStamina()) + " | Monster2 HP: " + to_string(m2->getHp())  + " Stam: " + to_string(m2->getStamina()) + "/" + to_string(m2->getMaxStamina()));
     }
 
     console.log("Done.");
