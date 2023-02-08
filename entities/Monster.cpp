@@ -208,6 +208,32 @@ bool Monster::operator>(Monster const &m) const
     return _stamina > m.getStamina();
 }
 
+void Monster::operator=(Monster const &m)
+{
+    _atk = m.getAttack();
+    _hp = m.getHp();
+    _maxHp = m.getMaxHp();
+    _speed = m.getSpeed();
+    _maxStamina = m.getMaxStamina();
+    _stamina = m.getStamina();
+    _name = m.getName();
+    _rarity = m._rarity;
+    //TODO add items overriding.
+}
+
+void Monster::operator=(Monster* const &m)
+{
+    _atk = m->getAttack();
+    _hp = m->getHp();
+    _maxHp = m->getMaxHp();
+    _speed = m->getSpeed();
+    _maxStamina = m->getMaxStamina();
+    _stamina = m->getStamina();
+    _name = m->getName();
+    _rarity = m->_rarity;
+    //TODO add items overriding.
+}
+
 Monster::~Monster()
 {
 }

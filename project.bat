@@ -1,5 +1,7 @@
 g++ -c "entities/items/Item.hpp"
 g++ -c "entities/items/Item.cpp"
+g++ -c "entities/Team.hpp"
+g++ -c "entities/Team.cpp"
 g++ -c "entities/Monster.hpp"
 g++ -c "entities/Monster.cpp"
 g++ -c "gameMethods/Farm.hpp"
@@ -11,5 +13,5 @@ g++ -c "frontend/TextInterface.cpp"
 g++ -c "Game.hpp"
 g++ -c "Game.cpp"
 g++ -c main.cpp
-g++ Item.o Monster.o Farm.o Fight.o TextInterface.o Game.o main.o -o MonsterFarmer
+g++ Item.o Team.o Monster.o Farm.o Fight.o TextInterface.o Game.o main.o -o MonsterFarmer
 MonsterFarmer.exe

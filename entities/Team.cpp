@@ -59,6 +59,12 @@ vector<Monster*> Team::getMonsters() const
     return _monsters;
 }
 
+Monster* Team::operator[](int i) 
+{
+    return _monsters[i % 4];
+}
+
 Team::~Team()
 {
+
 }

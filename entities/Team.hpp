@@ -21,6 +21,8 @@ public:
     virtual Monster*                getMonster(int id)  const;
     virtual std::vector<Monster*>   getMonsters()       const;
 
+    virtual Monster* operator[](int i);
+
     ~Team();
 };
 

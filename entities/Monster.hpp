@@ -69,6 +69,8 @@ public:
     virtual bool operator==(Monster const &m) const;
     virtual bool operator<(Monster const &m) const;
     virtual bool operator>(Monster const &m) const;
+    virtual void operator=(Monster const &m);
+    virtual void operator=(Monster* const &m);
 
     ~Monster();
 };

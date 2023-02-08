@@ -38,6 +38,17 @@ void test()
     Monster *m1 = new Monster(1, 1, 1, 1000, 1, "Slow monster", 1);
     Monster *m2 = new Monster(1, 1, 2, 1000, 2, "Fast Monster", 2);
 
+    Team *t1 = new Team();
+
+    *((*t1)[0]) = *m1;
+    ((*t1)[0])[0] = *m1;
+    *(t1[0][0]) = *m1;
+    *(t1->operator[](0)) = *m1;
+
+    t1[0] = *t1;
+
+    cout << t1->getMonster(0)->getName() << endl;
+
     cout << (m1 > m2) << endl;
     cout << (m1 < m2) << endl;
 }
