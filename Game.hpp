@@ -15,7 +15,6 @@ protected:
     std::vector<Item*> _items;
     std::vector<Fight*> _fights;
     Farm* _farm;
-    TextInterface console;
 
 public:
     Game();

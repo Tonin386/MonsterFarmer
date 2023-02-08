@@ -4,7 +4,7 @@ using namespace std;
 
 TextInterface::TextInterface() {}
 
-void TextInterface::log(string s) const
+void TextInterface::log(string s)
 {
     cout << s << endl;
 }

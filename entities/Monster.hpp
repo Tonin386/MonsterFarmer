@@ -16,38 +16,47 @@ protected:
     std::string _name;
     int _rarity;
 
-    Item* _armor;
-    Item* _weapon;
-    Item* _ring1;
-    Item* _ring2;
-    Item* _talisman;
+    Item *_armor;
+    Item *_weapon;
+    Item *_ring1;
+    Item *_ring2;
+    Item *_talisman;
 
     int _team;
+    int _id;
 
 public:
     Monster();
-    Monster(double atk, double mh, double speed, double ms, double s, std::string n, int r);
+    Monster(
+        int id,
+        double atk,
+        double maxHp,
+        double speed,
+        double maxStamina,
+        double stamina,
+        std::string name,
+        int rarity);
 
     /* TURN RELATED FUNCTIONS */
-    virtual void attack(Monster *target, double bonusStam = 0);
-    virtual void prepare(double modifier = 1);
-    virtual void receiveDamage(double d);
+    virtual double  attack(Monster *target, double bonusStam = 0);
+    virtual void    prepare(double modifier = 1);
+    virtual double  receiveDamage(double damage);
 
     virtual bool isAlive() const;
     virtual bool canPlay() const;
 
     /* STUFF RELATED FUNCTIONS */
-    virtual void equipArmor(Item* a);
-    virtual void equipWeapon(Item* w);
-    virtual void equipRing1(Item* r);
-    virtual void equipRing2(Item* r);
-    virtual void equipTalisman(Item* t);
+    virtual void equipArmor(Item *a);
+    virtual void equipWeapon(Item *w);
+    virtual void equipRing1(Item *r);
+    virtual void equipRing2(Item *r);
+    virtual void equipTalisman(Item *t);
 
     /* DAMAGE DONE MODIFIERS */
-    virtual double getCritRate()    const;
-    virtual double getDodgeRate()   const;
-    virtual double getComboRate()   const;
-    virtual double getStunRate()    const;
+    virtual double getCritRate() const;
+    virtual double getDodgeRate() const;
+    virtual double getComboRate() const;
+    virtual double getStunRate() const;
 
     /* INCOMING DAMAGE MODIFIERS */
     virtual double getDefenseRate() const;
@@ -62,6 +71,7 @@ public:
     virtual std::string getName()       const;
     virtual std::string getRarity()     const;
     virtual int         getTeam()       const;
+    virtual int         getId()         const;
 
     virtual void setTeam(int t);
 
@@ -70,9 +80,9 @@ public:
     virtual bool operator<(Monster const &m) const;
     virtual bool operator>(Monster const &m) const;
     virtual void operator=(Monster const &m);
-    virtual void operator=(Monster* const &m);
+    virtual void operator=(Monster *const &m);
 
     ~Monster();
 };
 
-#endif 
+#endif

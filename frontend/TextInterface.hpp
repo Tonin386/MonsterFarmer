@@ -11,7 +11,7 @@ protected:
 public:
     TextInterface();
 
-    virtual void log(std::string s) const;
+    static void log(std::string s);
 
     ~TextInterface();
 };

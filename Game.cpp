@@ -2,7 +2,7 @@
 
 using namespace std;
 
-Game::Game(/* args */) 
+Game::Game() 
 {
     _farm = new Farm();
 }
@@ -37,15 +37,15 @@ void Game::startFight(Team *attackers, Team *defenders)
     Fight *f = new Fight(attackers, defenders);
     _fights.push_back(f);
 
-    console.log("New fight has started between two monsters.");
+    TextInterface::log("New fight has started between two monsters.");
 
     while (f->playTurn())
     {
-        int i = 0;
-        //console.log("Monster1 HP:" + to_string(m1->getHp()) + " Stam: " + to_string(m1->getStamina()) + "/" + to_string(m1->getMaxStamina()) + " | Monster2 HP: " + to_string(m2->getHp())  + " Stam: " + to_string(m2->getStamina()) + "/" + to_string(m2->getMaxStamina()));
+        // TextInterface::log("Turn ended.");
     }
 
-    console.log("Done.");
+    TextInterface::log("Done.");
+    f->showStats();
 }
 
 void Game::startSummoning(int count)
@@ -55,23 +55,23 @@ void Game::startSummoning(int count)
         int tier = _farm->summonMonster();
         if (tier < 10)
         {
-            console.log("***** Legendary monster summoned! *****");
+            TextInterface::log("***** Legendary monster summoned! *****");
         }
         else if (tier > 10 && tier <= 60)
         {
-            console.log("**** Epic monster summoned! ****");
+            TextInterface::log("**** Epic monster summoned! ****");
         }
         else if (tier > 60 && tier <= 170)
         {
-            console.log("*** Rare monster summoned! ***");
+            TextInterface::log("*** Rare monster summoned! ***");
         }
         else if (tier > 170 && tier <= 400)
         {
-            console.log("** Uncommon monster summoned! **");
+            TextInterface::log("** Uncommon monster summoned! **");
         }
         else
         {
-            console.log("* Common monster summoned! *");
+            TextInterface::log("* Common monster summoned! *");
         }
     }
 }

@@ -1,4 +1,5 @@
 #include "Monster.hpp"
+#include <iostream>
 
 using namespace std;
 
@@ -21,10 +22,11 @@ Monster::Monster()
     _talisman = new Item();
 
     _team = 0;
+    _id = -1;
 }
 
-Monster::Monster(double atk, double mh, double speed, double ms, double s, string n, int r)
-    : _atk(atk), _maxHp(mh), _speed(speed), _maxStamina(ms), _stamina(s), _name(n), _rarity(r)
+Monster::Monster(int id, double atk, double maxHp, double speed, double maxStamina, double stamina, string name, int rarity)
+    : _id(id), _atk(atk), _maxHp(maxHp), _speed(speed), _maxStamina(maxStamina), _stamina(stamina), _name(name), _rarity(rarity)
 {
     _hp = _maxHp;
 
@@ -37,10 +39,11 @@ Monster::Monster(double atk, double mh, double speed, double ms, double s, strin
     _team = 0;
 }
 
-void Monster::attack(Monster *target, double bonusStam)
+double Monster::attack(Monster *target, double bonusStam)
 {
-    target->receiveDamage(_atk);
-    _stamina = bonusStam;
+    _stamina -= _maxStamina;
+    _stamina += bonusStam;
+    return target->receiveDamage(_atk);
 }
 
 void Monster::prepare(double modifier)
@@ -48,10 +51,12 @@ void Monster::prepare(double modifier)
     _stamina += _speed * modifier;
 }
 
-void Monster::receiveDamage(double d)
+double Monster::receiveDamage(double damage)
 {
-    double damage = d * getDefenseRate();
-    _hp -= damage;
+    double dealt = damage * (1 - getDefenseRate());
+    _hp -= dealt;
+    if(_hp <= 0) _stamina = -1;
+    return dealt;
 }
 
 bool Monster::isAlive() const
@@ -61,7 +66,7 @@ bool Monster::isAlive() const
 
 bool Monster::canPlay() const
 {
-    return _stamina > _maxStamina;
+    return _stamina >= _maxStamina;
 }
 
 void Monster::equipArmor(Item *a)
@@ -188,6 +193,11 @@ int Monster::getTeam() const
     return _team;
 }
 
+int Monster::getId() const
+{
+    return _id;
+}
+
 void Monster::setTeam(int t)
 {
     _team = t;
@@ -200,11 +210,13 @@ bool Monster::operator==(Monster const &m) const
 
 bool Monster::operator<(Monster const &m) const
 {
+    // cout << "Comparing " << _stamina << " < " << m.getStamina() << " Return: " << (_stamina < m.getStamina()) << endl; 
     return _stamina < m.getStamina();
 }
 
 bool Monster::operator>(Monster const &m) const
 {
+    // cout << "Comparing " << _stamina << " > " << m.getStamina() << " Return: " << (_stamina > m.getStamina()) << endl; 
     return _stamina > m.getStamina();
 }
 

@@ -5,52 +5,39 @@
 
 using namespace std;
 
-// void oldMain()
-// {
-//     Game *game = new Game();
-//     Monster *m1 = new Monster();
-//     Monster *m2 = new Monster();
-
-//     game->addMonster(m1);
-//     game->addMonster(m2);
-
-//     thread fight1(
-//         [](Game *g, Monster *m1, Monster *m2) -> void
-//         {
-//             g->startFight(m1, m2);
-//         },
-//         game, m1, m2);
-
-//     thread farm1(
-//         [](Game *g) -> void
-//         {
-//             g->startSummoning(10);
-//         },
-//         game);
-
-//     fight1.join();
-//     farm1.join();
-// }
-
 void test()
 {
     Game *game = new Game();
-    Monster *m1 = new Monster(1, 1, 1, 1000, 1, "Slow monster", 1);
-    Monster *m2 = new Monster(1, 1, 2, 1000, 2, "Fast Monster", 2);
+  //Monster(id, atk, maxHp, speed, maxStamina, stamina, name, rarity);
+    Monster *m1 = new Monster(0, 60, 15000, 85, 1000, 0, "King's Knight", 2);
+    Monster *m2 = new Monster(1, 60, 15000, 85, 1000, 0, "King's Knight", 2);
+    Monster *m3 = new Monster(2, 135, 8000, 100, 1000, 0, "King's Archer", 2);
+    Monster *m4 = new Monster(3, 135, 8000, 100, 1000, 0, "King's Archer", 2);
+    Monster *m5 = new Monster(4, 72, 11000, 70, 1000, 0, "Big Orc", 1);
+    Monster *m6 = new Monster(5, 72, 11000, 70, 1000, 0, "Big Orc", 1);
+    Monster *m7 = new Monster(6, 100, 7500, 120, 1000, 0, "Small gobelin", 1);
+    Monster *m8 = new Monster(7, 100, 7500, 120, 1000, 0, "Small gobelin", 1);
 
     Team *t1 = new Team();
+    t1->addMonster(m1);
+    t1->addMonster(m2);
+    t1->addMonster(m3);
+    t1->addMonster(m4);
 
-    *((*t1)[0]) = *m1;
-    ((*t1)[0])[0] = *m1;
-    *(t1[0][0]) = *m1;
-    *(t1->operator[](0)) = *m1;
+    Team *t2 = new Team();
+    t2->addMonster(m5);
+    t2->addMonster(m6);
+    t2->addMonster(m7);
+    t2->addMonster(m8);
+    
+    thread fight1(
+        [](Game *g, Team *t1, Team *t2) -> void
+        {
+            g->startFight(t1, t2);
+        },
+        game, t1, t2);
 
-    t1[0] = *t1;
-
-    cout << t1->getMonster(0)->getName() << endl;
-
-    cout << (m1 > m2) << endl;
-    cout << (m1 < m2) << endl;
+    fight1.join();
 }
 
 int main(int argc, char const *argv[])

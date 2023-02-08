@@ -4,7 +4,7 @@ using namespace std;
 
 Team::Team()
 {
-    Monster* nullMonster = new Monster(0, 0, 0, 0, 0, "None", 0);
+    Monster* nullMonster = new Monster(-1, 0, 0, 0, 0, 0, "None", 0);
     _monsters.push_back(nullMonster);
     _monsters.push_back(nullMonster);
     _monsters.push_back(nullMonster);
@@ -43,10 +43,10 @@ bool Team::hasLost() const
 {
     for(int i = 0; i < 4; i++)
     {
-        if(!_monsters[i]->isAlive()) return true;
+        if(_monsters[i]->isAlive()) return false;
     }
 
-    return false;
+    return true;
 }
 
 Monster* Team::getMonster(int id) const
