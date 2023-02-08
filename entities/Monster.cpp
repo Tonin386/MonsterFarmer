@@ -55,7 +55,8 @@ double Monster::receiveDamage(double damage)
 {
     double dealt = damage * (1 - getDefenseRate());
     _hp -= dealt;
-    if(_hp <= 0) _stamina = -1;
+    if (_hp <= 0)
+        _stamina = -1;
     return dealt;
 }
 
@@ -210,13 +211,13 @@ bool Monster::operator==(Monster const &m) const
 
 bool Monster::operator<(Monster const &m) const
 {
-    // cout << "Comparing " << _stamina << " < " << m.getStamina() << " Return: " << (_stamina < m.getStamina()) << endl; 
+    // cout << "Comparing " << _stamina << " < " << m.getStamina() << " Return: " << (_stamina < m.getStamina()) << endl;
     return _stamina < m.getStamina();
 }
 
 bool Monster::operator>(Monster const &m) const
 {
-    // cout << "Comparing " << _stamina << " > " << m.getStamina() << " Return: " << (_stamina > m.getStamina()) << endl; 
+    // cout << "Comparing " << _stamina << " > " << m.getStamina() << " Return: " << (_stamina > m.getStamina()) << endl;
     return _stamina > m.getStamina();
 }
 
@@ -230,10 +231,10 @@ void Monster::operator=(Monster const &m)
     _stamina = m.getStamina();
     _name = m.getName();
     _rarity = m._rarity;
-    //TODO add items overriding.
+    // TODO add items overriding.
 }
 
-void Monster::operator=(Monster* const &m)
+void Monster::operator=(Monster *const &m)
 {
     _atk = m->getAttack();
     _hp = m->getHp();
@@ -243,7 +244,7 @@ void Monster::operator=(Monster* const &m)
     _stamina = m->getStamina();
     _name = m->getName();
     _rarity = m->_rarity;
-    //TODO add items overriding.
+    // TODO add items overriding.
 }
 
 Monster::~Monster()

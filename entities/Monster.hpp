@@ -38,9 +38,9 @@ public:
         int rarity);
 
     /* TURN RELATED FUNCTIONS */
-    virtual double  attack(Monster *target, double bonusStam = 0);
-    virtual void    prepare(double modifier = 1);
-    virtual double  receiveDamage(double damage);
+    virtual double attack(Monster *target, double bonusStam = 0);
+    virtual void prepare(double modifier = 1);
+    virtual double receiveDamage(double damage);
 
     virtual bool isAlive() const;
     virtual bool canPlay() const;
@@ -62,16 +62,16 @@ public:
     virtual double getDefenseRate() const;
 
     /* SETTERS & GETTERS OF ATTRIBUTES */
-    virtual double      getHp()         const;
-    virtual double      getMaxHp()      const;
-    virtual double      getAttack()     const;
-    virtual double      getMaxStamina() const;
-    virtual double      getStamina()    const;
-    virtual double      getSpeed()      const;
-    virtual std::string getName()       const;
-    virtual std::string getRarity()     const;
-    virtual int         getTeam()       const;
-    virtual int         getId()         const;
+    virtual double getHp() const;
+    virtual double getMaxHp() const;
+    virtual double getAttack() const;
+    virtual double getMaxStamina() const;
+    virtual double getStamina() const;
+    virtual double getSpeed() const;
+    virtual std::string getName() const;
+    virtual std::string getRarity() const;
+    virtual int getTeam() const;
+    virtual int getId() const;
 
     virtual void setTeam(int t);
 

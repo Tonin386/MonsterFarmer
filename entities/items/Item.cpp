@@ -4,12 +4,12 @@ using namespace std;
 
 Item::Item()
 {
-    //The sum of crit, dodge, combo and stun cannot be > 100 for Legendary item
+    // The sum of crit, dodge, combo and stun cannot be > 100 for Legendary item
     _crit = 1;
     _dodge = 1;
     _combo = 1;
     _stun = 1;
-    _def = 1000; //Max defense should be 100000. equivalent to 100% def.
+    _def = 1000; // Max defense should be 100000. equivalent to 100% def.
     _name = "Unwearable item";
     _type = '?';
 
@@ -20,7 +20,7 @@ Item::Item()
 Item::Item(double crit, double dodge, double combo, double stun, double def, string name, char type, int rarity)
     : _crit(crit), _dodge(dodge), _combo(combo), _stun(stun), _def(def), _name(name), _type(type), _rarity(rarity)
 {
-    //Well it's done actually...
+    // Well it's done actually...
 }
 
 double Item::getCrit() const

@@ -2,7 +2,7 @@
 
 using namespace std;
 
-Game::Game() 
+Game::Game()
 {
     _farm = new Farm();
 }

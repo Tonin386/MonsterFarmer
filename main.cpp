@@ -8,7 +8,7 @@ using namespace std;
 void test()
 {
     Game *game = new Game();
-  //Monster(id, atk, maxHp, speed, maxStamina, stamina, name, rarity);
+    // Monster(id, atk, maxHp, speed, maxStamina, stamina, name, rarity);
     Monster *m1 = new Monster(0, 60, 15000, 85, 1000, 0, "King's Knight", 2);
     Monster *m2 = new Monster(1, 60, 15000, 85, 1000, 0, "King's Knight", 2);
     Monster *m3 = new Monster(2, 135, 8000, 100, 1000, 0, "King's Archer", 2);
@@ -29,7 +29,7 @@ void test()
     t2->addMonster(m6);
     t2->addMonster(m7);
     t2->addMonster(m8);
-    
+
     thread fight1(
         [](Game *g, Team *t1, Team *t2) -> void
         {

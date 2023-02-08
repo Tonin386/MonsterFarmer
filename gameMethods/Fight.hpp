@@ -11,11 +11,12 @@ protected:
     int _turnCount;
     std::map<int, int> _attacksCount;
     std::map<int, double> _damageDealt;
-    Team* _attackers;
-    Team* _defenders;
-    std::vector<Monster*> _all;
+    Team *_attackers;
+    Team *_defenders;
+    std::vector<Monster *> _all;
+
 public:
-    Fight(Team* a, Team* d);
+    Fight(Team *a, Team *d);
 
     virtual bool playTurn();
     virtual void showStats();

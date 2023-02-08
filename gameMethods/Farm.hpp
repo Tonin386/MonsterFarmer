@@ -1,8 +1,8 @@
 #ifndef FARM_HPP
 #define FARM_HPP
 
-#include <cstdlib> 
-#include <ctime> 
+#include <cstdlib>
+#include <ctime>
 
 class Farm
 {
@@ -14,6 +14,5 @@ public:
 
     ~Farm();
 };
-
 
 #endif

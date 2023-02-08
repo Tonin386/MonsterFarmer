@@ -24,7 +24,8 @@ Fight::Fight(Team *a, Team *d) : _attackers(a), _defenders(d)
 
 bool Fight::playTurn()
 {
-    sort(_all.begin(), _all.end(), [](const Monster *a, const Monster *b){return a->getStamina() > b->getStamina();});
+    sort(_all.begin(), _all.end(), [](const Monster *a, const Monster *b)
+         { return a->getStamina() > b->getStamina(); });
     _turnCount++;
 
     for (int i = 0; i < 8; i++)
@@ -32,7 +33,7 @@ bool Fight::playTurn()
         int id = _all[i]->getId();
         if (_all[i]->canPlay() && _all[i]->isAlive())
         {
-            for (int j = 0; j < 4; j++) //We find the target of the attack
+            for (int j = 0; j < 4; j++) // We find the target of the attack
             {
                 if (_all[i]->getTeam() == 1)
                 {
@@ -46,7 +47,7 @@ bool Fight::playTurn()
                 }
                 else
                 {
-                    if((*_attackers)[j]->isAlive())
+                    if ((*_attackers)[j]->isAlive())
                     {
                         _attacksCount[id]++;
                         _damageDealt[id] += _all[i]->attack((*_attackers)[j]);
@@ -56,8 +57,8 @@ bool Fight::playTurn()
                 }
             }
         }
-        else if(_all[i]->isAlive()) //we must stack stamina to attack.
-        { 
+        else if (_all[i]->isAlive()) // we must stack stamina to attack.
+        {
             // TextInterface::log(_all[i]->getName() + " prepares. " + to_string(_all[i]->getStamina()) + "+" + to_string(_all[i]->getSpeed()) + "/" + to_string(_all[i]->getMaxStamina()));
             _all[i]->prepare();
         }
@@ -75,7 +76,7 @@ bool Fight::playTurn()
 
 void Fight::showStats()
 {
-    for(int i = 0; i < 8; i++)
+    for (int i = 0; i < 8; i++)
     {
         int id = _all[i]->getId();
         TextInterface::log(_all[i]->getName() + " attacked " + to_string(_attacksCount[id]) + " times for a total of " + to_string(_damageDealt[id]) + " of damage done.");
