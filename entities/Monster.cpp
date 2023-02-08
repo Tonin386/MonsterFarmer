@@ -1,5 +1,4 @@
 #include "Monster.hpp"
-#include <string>
 
 using namespace std;
 
@@ -176,6 +175,8 @@ string Monster::getRarity() const
         return "Legendary";
         break;
     }
+
+    return "Error";
 }
 
 Monster::~Monster()

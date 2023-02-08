@@ -1,5 +1,4 @@
 #include "Item.hpp"
-#include <string>
 
 using namespace std;
 
@@ -44,6 +43,21 @@ double Item::getStun() const
     return _stun;
 }
 
+double Item::getDef() const
+{
+    return _def;
+}
+
+string Item::getName() const
+{
+    return _name;
+}
+
+char Item::getType() const
+{
+    return _type;
+}
+
 double Item::getRating() const
 {
     return _rating;
@@ -69,6 +83,8 @@ string Item::getRarity() const
         return "Legendary";
         break;
     }
+
+    return "Error";
 }
 
 Item::~Item()

@@ -41,7 +41,7 @@ void Game::startFight(Monster *m1, Monster *m2)
 
     while (f->playTurn())
     {
-        console.log("Monster1 hp:" + to_string(m1->getHp()) + " vs Monster2 hp: " + to_string(m2->getHp()));
+        console.log("Monster1 HP:" + to_string(m1->getHp()) + " Stam: " + to_string(m1->getStamina()) + "/" + to_string(m1->getMaxStamina()) + " | Monster2 HP: " + to_string(m2->getHp())  + " Stam: " + to_string(m2->getStamina()) + "/" + to_string(m2->getMaxStamina()));
     }
 
     console.log("Done.");
