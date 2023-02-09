@@ -45,7 +45,7 @@ void Game::startFight(Team *attackers, Team *defenders)
     }
 
     TextInterface::log("Done.");
-    f->showStats();
+    TextInterface::showStats(f);
 }
 
 void Game::startSummoning(int count)

@@ -2,7 +2,6 @@
 #define FIGHT_HPP
 
 #include "../entities/Team.hpp"
-#include "../frontend/TextInterface.hpp"
 #include <map>
 
 class Fight
@@ -19,7 +18,13 @@ public:
     Fight(Team *a, Team *d);
 
     virtual bool playTurn();
-    virtual void showStats();
+
+    virtual int getTurnCount() const;
+    virtual std::map<int, int> getAttacksCount() const;
+    virtual std::map<int, double> getDamageDealt() const;
+    virtual Team* getAttackers() const;
+    virtual Team* getDefenders() const;
+    std::vector<Monster*> getMonsters() const;
 
     ~Fight();
 };

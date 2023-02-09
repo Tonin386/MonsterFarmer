@@ -13,6 +13,14 @@ protected:
     double _maxStamina;
     double _stamina;
 
+    double g_atk;
+    double g_maxHp;
+    double g_speed;
+    
+    double b_atk;
+    double b_maxHp;
+    double b_speed;
+
     std::string _name;
     int _rarity;
 
@@ -24,18 +32,25 @@ protected:
 
     int _team;
     int _id;
+    double _rating;
+
+    double _xp;
+    int _level;
+
+    static double calcTotalXpForLevel(int level);
 
 public:
     Monster();
     Monster(
         int id,
-        double atk,
-        double maxHp,
-        double speed,
+        double baseAtk,
+        double baseMaxHp,
+        double baseSpeed,
         double maxStamina,
         double stamina,
         std::string name,
-        int rarity);
+        int rarity,
+        double xp);
 
     /* TURN RELATED FUNCTIONS */
     virtual double attack(Monster *target, double bonusStam = 0);
@@ -44,6 +59,10 @@ public:
 
     virtual bool isAlive() const;
     virtual bool canPlay() const;
+
+    /* MANAGE MONSTER FUNCTIONS */
+    virtual int levelUp(bool verbose = true);
+    virtual void addXp(double xp);
 
     /* STUFF RELATED FUNCTIONS */
     virtual void equipArmor(Item *a);
@@ -68,10 +87,18 @@ public:
     virtual double getMaxStamina() const;
     virtual double getStamina() const;
     virtual double getSpeed() const;
+    virtual double getBaseAttack() const;
+    virtual double getBaseMaxHp() const;
+    virtual double getBaseSpeed() const;
+    virtual double getAttackGrowth() const;
+    virtual double getMaxHpGrowth() const;
+    virtual double getSpeedGrowth() const;
     virtual std::string getName() const;
     virtual std::string getRarity() const;
     virtual int getTeam() const;
     virtual int getId() const;
+    virtual double getRating() const;
+    virtual int getLevel() const;
 
     virtual void setTeam(int t);
 

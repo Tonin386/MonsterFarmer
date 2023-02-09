@@ -74,13 +74,34 @@ bool Fight::playTurn()
     return !(_attackers->hasLost() || _defenders->hasLost());
 }
 
-void Fight::showStats()
+int Fight::getTurnCount() const
 {
-    for (int i = 0; i < 8; i++)
-    {
-        int id = _all[i]->getId();
-        TextInterface::log(_all[i]->getName() + " attacked " + to_string(_attacksCount[id]) + " times for a total of " + to_string(_damageDealt[id]) + " of damage done.");
-    }
+    return _turnCount;
+}
+
+map<int, int> Fight::getAttacksCount() const
+{
+    return _attacksCount;
+}
+
+map<int, double> Fight::getDamageDealt() const
+{
+    return _damageDealt;
+}
+
+Team* Fight::getAttackers() const
+{
+    return _attackers;
+}
+
+Team* Fight::getDefenders() const
+{
+    return _defenders;
+}
+
+vector<Monster*> Fight::getMonsters() const
+{
+    return _all;
 }
 
 Fight::~Fight() {}

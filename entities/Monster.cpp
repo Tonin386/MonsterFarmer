@@ -1,14 +1,21 @@
 #include "Monster.hpp"
+
+#include "../frontend/TextInterface.hpp"
 #include <iostream>
+#include <cmath>
 
 using namespace std;
 
 Monster::Monster()
 {
-    _atk = 1000;
-    _hp = 10000;
-    _maxHp = 10000;
-    _speed = 100;
+    b_atk = 1000;
+    b_maxHp = 10000;
+    b_speed = 100;
+
+    _atk = b_atk;
+    _maxHp = b_maxHp;
+    _speed = b_speed;
+    _hp = _maxHp;
     _maxStamina = 1000;
     _stamina = 0;
 
@@ -23,12 +30,18 @@ Monster::Monster()
 
     _team = 0;
     _id = -1;
+    _rating = (_atk + _maxHp/10 + _speed*10) / 30;
 }
 
-Monster::Monster(int id, double atk, double maxHp, double speed, double maxStamina, double stamina, string name, int rarity)
-    : _id(id), _atk(atk), _maxHp(maxHp), _speed(speed), _maxStamina(maxStamina), _stamina(stamina), _name(name), _rarity(rarity)
+Monster::Monster(int id, double baseAtk, double baseMaxHp, double baseSpeed, double maxStamina, double stamina, string name, int rarity, double xp)
+    : _id(id), b_atk(baseAtk), b_maxHp(baseMaxHp), b_speed(baseSpeed), _maxStamina(maxStamina), _stamina(stamina), _name(name), _rarity(rarity), _xp(xp)
 {
+    _atk = b_atk;
+    _maxHp = b_maxHp;
+    _speed = b_speed;
     _hp = _maxHp;
+
+    levelUp(false);
 
     _armor = new Item();
     _weapon = new Item();
@@ -68,6 +81,37 @@ bool Monster::isAlive() const
 bool Monster::canPlay() const
 {
     return _stamina >= _maxStamina;
+}
+
+double Monster::calcTotalXpForLevel(int level)
+{
+    return level^2 * 1000;
+}
+
+int Monster::levelUp(bool verbose)
+{  
+    int i = 0;
+
+    while(calcTotalXpForLevel(i + _level) < _xp) {i++;}
+    if(i >= 1)
+    {
+        _level += i;
+        _atk = b_atk * (1 + _level * g_atk);
+        _maxHp = b_maxHp * (1 + _level * g_maxHp);
+        _speed = b_speed * (1 + _level * g_speed);
+        
+        if(verbose)
+        {
+            TextInterface::log(_name + " gained " + to_string(i) + " level(s) and now is level " + to_string(_level));
+        }
+    }
+
+    return i;
+}
+
+void Monster::addXp(double xp)
+{
+    _xp += xp;
 }
 
 void Monster::equipArmor(Item *a)
@@ -160,6 +204,36 @@ double Monster::getSpeed() const
     return _speed;
 }
 
+double Monster::getBaseAttack() const
+{
+    return b_atk;
+}
+
+double Monster::getBaseMaxHp() const
+{
+    return b_maxHp;
+}
+
+double Monster::getBaseSpeed() const
+{
+    return b_speed;
+}
+
+double Monster::getAttackGrowth() const
+{
+    return g_atk;
+}
+
+double Monster::getMaxHpGrowth() const
+{
+    return g_maxHp;
+}
+
+double Monster::getSpeedGrowth() const
+{
+    return g_speed;
+}
+
 string Monster::getName() const
 {
     return _name;
@@ -197,6 +271,16 @@ int Monster::getTeam() const
 int Monster::getId() const
 {
     return _id;
+}
+
+double Monster::getRating() const
+{
+    return _rating;
+}
+
+int Monster::getLevel() const
+{
+    return _level;
 }
 
 void Monster::setTeam(int t)

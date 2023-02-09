@@ -1,7 +1,9 @@
 #ifndef TEXTINTERFACE_HPP
 #define TEXTINTERFACE_HPP
 
-#include <iostream>
+class Monster;
+class Fight;
+
 #include <string>
 
 class TextInterface
@@ -12,6 +14,8 @@ public:
     TextInterface();
 
     static void log(std::string s);
+    static void showStats(Monster *m);
+    static void showStats(Fight *f);
 
     ~TextInterface();
 };
