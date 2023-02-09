@@ -1,7 +1,7 @@
 #ifndef MONSTER_HPP
 #define MONSTER8HPP
 
-#include "items/Item.hpp"
+#include "../items/Item.hpp"
 
 class Monster
 {

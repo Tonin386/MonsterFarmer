@@ -1,7 +1,7 @@
 #ifndef FIGHT_HPP
 #define FIGHT_HPP
 
-#include "../entities/Team.hpp"
+#include "../entities/monsters/Team.hpp"
 #include <map>
 
 class Fight

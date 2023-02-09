@@ -1,7 +1,7 @@
 #include "Fight.hpp"
 #include <algorithm>
 
-#include "../frontend/TextInterface.hpp"
+#include "../../views/TextInterface.hpp"
 
 using namespace std;
 

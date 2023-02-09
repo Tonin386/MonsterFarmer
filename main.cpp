@@ -1,5 +1,4 @@
 #include "Game.hpp"
-#include "frontend/TextInterface.hpp"
 
 #include <thread>
 #include <functional>

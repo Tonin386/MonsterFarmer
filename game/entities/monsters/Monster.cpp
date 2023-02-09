@@ -1,6 +1,6 @@
 #include "Monster.hpp"
 
-#include "../frontend/TextInterface.hpp"
+#include "../../../views/TextInterface.hpp"
 #include <iostream>
 #include <cmath>
 

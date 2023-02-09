@@ -1,6 +1,6 @@
 #include "TextInterface.hpp"
 
-#include "../gameMethods/Fight.hpp"
+#include "../game/scenarios/Fight.hpp"
 #include <iostream>
 #include <iomanip>
 #include <map>

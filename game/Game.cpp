@@ -1,7 +1,7 @@
 #include "Game.hpp"
 
-#include "frontend/TextInterface.hpp"
-#include "libraries/json.hpp"
+#include "../views/TextInterface.hpp"
+#include "../libraries/json.hpp"
 
 #include <fstream>
 

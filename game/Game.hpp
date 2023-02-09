@@ -2,8 +2,8 @@
 #define GAME_HPP
 
 #include "entities/items/Item.hpp"
-#include "gameMethods/Farm.hpp"
-#include "gameMethods/Fight.hpp"
+#include "scenarios/Farm.hpp"
+#include "scenarios/Fight.hpp"
 
 #include <vector>
 
