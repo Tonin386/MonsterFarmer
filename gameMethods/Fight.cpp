@@ -1,6 +1,8 @@
 #include "Fight.hpp"
 #include <algorithm>
 
+#include "../frontend/TextInterface.hpp"
+
 using namespace std;
 
 Fight::Fight(Team *a, Team *d) : _attackers(a), _defenders(d)

@@ -30,6 +30,11 @@ public:
     virtual double getRating() const;
     virtual std::string getRarity() const;
 
+    static const char ARMOR_TYPE = 'A';
+    static const char WEAPON_TYPE = 'W';
+    static const char RING_TYPE = 'R';
+    static const char TALISMAN_TYPE = 'T';
+
     ~Item();
 };
 

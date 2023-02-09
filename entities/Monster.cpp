@@ -31,16 +31,20 @@ Monster::Monster()
     _team = 0;
     _id = -1;
     _rating = (_atk + _maxHp/10 + _speed*10) / 30;
+
+    _level = 0;
+    _xp = 0;
 }
 
-Monster::Monster(int id, double baseAtk, double baseMaxHp, double baseSpeed, double maxStamina, double stamina, string name, int rarity, double xp)
-    : _id(id), b_atk(baseAtk), b_maxHp(baseMaxHp), b_speed(baseSpeed), _maxStamina(maxStamina), _stamina(stamina), _name(name), _rarity(rarity), _xp(xp)
+Monster::Monster(string name, int rarity, double baseAtk, double baseMaxHp, double baseSpeed, double atkGrowth, double maxHpGrowth, double speedGrowth, double maxStamina, double stamina, double xp)
+    : b_atk(baseAtk), b_maxHp(baseMaxHp), b_speed(baseSpeed), _maxStamina(maxStamina), _stamina(stamina), _name(name), _rarity(rarity), _xp(xp)
 {
     _atk = b_atk;
     _maxHp = b_maxHp;
     _speed = b_speed;
     _hp = _maxHp;
 
+    _level = 0;
     levelUp(false);
 
     _armor = new Item();
@@ -50,6 +54,42 @@ Monster::Monster(int id, double baseAtk, double baseMaxHp, double baseSpeed, dou
     _talisman = new Item();
 
     _team = 0;
+    _id = -1;
+    _rating = (_atk + _maxHp/10 + _speed*10) / 30;
+}
+
+Monster::Monster(Monster *m)
+{
+    _atk = m->_atk;
+    _hp = m->_hp;
+    _maxHp = m->_maxHp;
+    _speed = m->_speed;
+    _maxStamina = m->_maxStamina;
+    _stamina = m->_stamina;
+
+    g_atk = m->g_atk;
+    g_maxHp = m->g_maxHp;
+    g_speed = m->g_speed;
+    
+    b_atk = m->b_atk;
+    b_maxHp = m->b_maxHp;
+    b_speed = m->b_speed;
+
+    _name = m->_name;
+    _rarity = m->_rarity;
+
+    _armor = m->_armor;
+    _weapon = m->_weapon;
+    _ring1 = m->_ring1;
+    _ring2 = m->_ring2;
+    _talisman = m->_talisman;
+
+    _team = m->_team;
+    _rating = m->_rating;
+
+    _xp = m->_xp;
+    _level = m->_level;
+    _id = -1;
 }
 
 double Monster::attack(Monster *target, double bonusStam)
@@ -286,6 +326,11 @@ int Monster::getLevel() const
 void Monster::setTeam(int t)
 {
     _team = t;
+}
+
+void Monster::setId(int id)
+{
+    _id = id;
 }
 
 bool Monster::operator==(Monster const &m) const

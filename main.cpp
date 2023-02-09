@@ -1,22 +1,41 @@
 #include "Game.hpp"
+#include "frontend/TextInterface.hpp"
 
 #include <thread>
 #include <functional>
+#include <iostream>
 
 using namespace std;
 
 void test()
 {
     Game *game = new Game();
-    // Monster(id, atk, maxHp, speed, maxStamina, stamina, name, rarity);
-    Monster *m1 = new Monster(0, 60, 15000, 85, 1000, 0, "King's Knight", 2, 0);
-    Monster *m2 = new Monster(1, 60, 15000, 85, 1000, 0, "King's Knight", 2, 0);
-    Monster *m3 = new Monster(2, 135, 8000, 100, 1000, 0, "King's Archer", 2, 0);
-    Monster *m4 = new Monster(3, 135, 8000, 100, 1000, 0, "King's Archer", 2, 0);
-    Monster *m5 = new Monster(4, 72, 11000, 70, 1000, 0, "Big Orc", 1, 0);
-    Monster *m6 = new Monster(5, 72, 11000, 70, 1000, 0, "Big Orc", 1, 0);
-    Monster *m7 = new Monster(6, 100, 7500, 120, 1000, 0, "Small gobelin", 1, 0);
-    Monster *m8 = new Monster(7, 100, 7500, 120, 1000, 0, "Small gobelin", 1, 0);
+    int loadedMonsterTemplates = game->loadMonsterTemplates();
+    cout << "Loaded " << loadedMonsterTemplates << " monster templates." << endl;
+    Monster *m1 = new Monster(game->getMonsterTemplates()[rand() % loadedMonsterTemplates]);
+    Monster *m2 = new Monster(game->getMonsterTemplates()[rand() % loadedMonsterTemplates]);
+    Monster *m3 = new Monster(game->getMonsterTemplates()[rand() % loadedMonsterTemplates]);
+    Monster *m4 = new Monster(game->getMonsterTemplates()[rand() % loadedMonsterTemplates]);
+    Monster *m5 = new Monster(game->getMonsterTemplates()[rand() % loadedMonsterTemplates]);
+    Monster *m6 = new Monster(game->getMonsterTemplates()[rand() % loadedMonsterTemplates]);
+    Monster *m7 = new Monster(game->getMonsterTemplates()[rand() % loadedMonsterTemplates]);
+    Monster *m8 = new Monster(game->getMonsterTemplates()[rand() % loadedMonsterTemplates]);
+    game->addActiveMonster(m1);
+    game->addActiveMonster(m2);
+    game->addActiveMonster(m3);
+    game->addActiveMonster(m4);
+    game->addActiveMonster(m5);
+    game->addActiveMonster(m6);
+    game->addActiveMonster(m7);
+    game->addActiveMonster(m8);
+    TextInterface::showStats(m1);
+    TextInterface::showStats(m2);
+    TextInterface::showStats(m3);
+    TextInterface::showStats(m4);
+    TextInterface::showStats(m5);
+    TextInterface::showStats(m6);
+    TextInterface::showStats(m7);
+    TextInterface::showStats(m8);
 
     Team *t1 = new Team();
     t1->addMonster(m1);

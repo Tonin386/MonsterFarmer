@@ -42,15 +42,19 @@ protected:
 public:
     Monster();
     Monster(
-        int id,
+        std::string name,
+        int rarity,
         double baseAtk,
         double baseMaxHp,
         double baseSpeed,
+        double atkGrowth,
+        double maxHpGrowth,
+        double speedGrowth,
         double maxStamina,
         double stamina,
-        std::string name,
-        int rarity,
         double xp);
+
+    Monster(Monster *m);
 
     /* TURN RELATED FUNCTIONS */
     virtual double attack(Monster *target, double bonusStam = 0);
@@ -101,6 +105,7 @@ public:
     virtual int getLevel() const;
 
     virtual void setTeam(int t);
+    virtual void setId(int id);
 
     /* OPERATORS */
     virtual bool operator==(Monster const &m) const;

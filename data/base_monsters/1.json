@@ -1,0 +1,13 @@
+{
+    "name": "King's Knight",
+    "rarity": 1,
+    "baseAttack": 1500,
+    "baseMaxHp": 12500,
+    "baseSpeed": 80,
+    "attackGrowth": 0.025,
+    "maxHpGrowth": 0.025,
+    "speedGrowth": 0.015,
+    "maxStamina": 1000,
+    "stamina": 0,
+    "xp": 0
+}

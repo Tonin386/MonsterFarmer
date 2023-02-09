@@ -4,7 +4,7 @@ using namespace std;
 
 Team::Team()
 {
-    Monster *nullMonster = new Monster(-1, 0, 0, 0, 0, 0, "None", 0, 0);
+    Monster *nullMonster = new Monster();
     _monsters.push_back(nullMonster);
     _monsters.push_back(nullMonster);
     _monsters.push_back(nullMonster);
