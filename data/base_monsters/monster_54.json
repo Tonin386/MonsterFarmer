@@ -1,0 +1,13 @@
+{
+    "name": "Phoenix",
+    "rarity": 3,
+    "baseAttack": 2400.65,
+    "baseMaxHp": 13916.56,
+    "baseSpeed": 87.78,
+    "attackGrowth": 0.0297,
+    "maxHpGrowth": 0.052,
+    "speedGrowth": 0.0256,
+    "maxStamina": 1000,
+    "stamina": 0.0,
+    "xp": 0.0
+}

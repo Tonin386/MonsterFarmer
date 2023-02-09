@@ -1,0 +1,13 @@
+{
+    "name": "Minotaur",
+    "rarity": 2,
+    "baseAttack": 2020.74,
+    "baseMaxHp": 10950.81,
+    "baseSpeed": 75.18,
+    "attackGrowth": 0.0155,
+    "maxHpGrowth": 0.0555,
+    "speedGrowth": 0.0184,
+    "maxStamina": 1000,
+    "stamina": 0.0,
+    "xp": 0.0
+}

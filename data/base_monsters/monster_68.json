@@ -1,0 +1,13 @@
+{
+    "name": "Hydratic",
+    "rarity": 4,
+    "baseAttack": 2284.22,
+    "baseMaxHp": 13515.44,
+    "baseSpeed": 133.84,
+    "attackGrowth": 0.0798,
+    "maxHpGrowth": 0.0629,
+    "speedGrowth": 0.0464,
+    "maxStamina": 1000,
+    "stamina": 0.0,
+    "xp": 0.0
+}

@@ -1,0 +1,13 @@
+{
+    "name": "Zombie",
+    "rarity": 1,
+    "baseAttack": 2167.42,
+    "baseMaxHp": 14446.23,
+    "baseSpeed": 50.03,
+    "attackGrowth": 0.0175,
+    "maxHpGrowth": 0.0463,
+    "speedGrowth": 0.0273,
+    "maxStamina": 1000,
+    "stamina": 0.0,
+    "xp": 0.0
+}

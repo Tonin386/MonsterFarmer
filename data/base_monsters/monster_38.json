@@ -1,0 +1,13 @@
+{
+    "name": "Ogre Mage",
+    "rarity": 2,
+    "baseAttack": 2630.25,
+    "baseMaxHp": 12821.22,
+    "baseSpeed": 65.13,
+    "attackGrowth": 0.0139,
+    "maxHpGrowth": 0.0278,
+    "speedGrowth": 0.0243,
+    "maxStamina": 1000,
+    "stamina": 0.0,
+    "xp": 0.0
+}

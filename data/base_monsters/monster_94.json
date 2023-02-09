@@ -1,0 +1,13 @@
+{
+    "name": "Urien",
+    "rarity": 5,
+    "baseAttack": 4218.91,
+    "baseMaxHp": 22363.18,
+    "baseSpeed": 126.49,
+    "attackGrowth": 0.0583,
+    "maxHpGrowth": 0.1356,
+    "speedGrowth": 0.0699,
+    "maxStamina": 950,
+    "stamina": 0.0,
+    "xp": 0.0
+}

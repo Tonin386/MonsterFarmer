@@ -1,0 +1,13 @@
+{
+    "name": "Zephyr Drake",
+    "rarity": 3,
+    "baseAttack": 2286.61,
+    "baseMaxHp": 12985.31,
+    "baseSpeed": 83.34,
+    "attackGrowth": 0.028,
+    "maxHpGrowth": 0.0508,
+    "speedGrowth": 0.0365,
+    "maxStamina": 1000,
+    "stamina": 0.0,
+    "xp": 0.0
+}

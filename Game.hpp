@@ -24,6 +24,7 @@ public:
     Game(std::vector<Monster *> m, std::vector<Item *> i);
 
     virtual std::vector<Monster *> getMonsterTemplates() const;
+    virtual std::vector<Monster *> getMonsterTemplatesByRarity(int rarity);
     virtual std::vector<Item *> getItemTemplates() const;
 
     virtual std::vector<Monster*> getActiveMonsters() const;

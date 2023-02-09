@@ -1,0 +1,13 @@
+{
+    "name": "Kallisto",
+    "rarity": 5,
+    "baseAttack": 2837.78,
+    "baseMaxHp": 24126.56,
+    "baseSpeed": 138.09,
+    "attackGrowth": 0.097,
+    "maxHpGrowth": 0.1349,
+    "speedGrowth": 0.0551,
+    "maxStamina": 950,
+    "stamina": 0.0,
+    "xp": 0.0
+}

@@ -1,0 +1,13 @@
+{
+    "name": "Shadow Fiend",
+    "rarity": 3,
+    "baseAttack": 2238.47,
+    "baseMaxHp": 12707.62,
+    "baseSpeed": 119.18,
+    "attackGrowth": 0.0313,
+    "maxHpGrowth": 0.0338,
+    "speedGrowth": 0.0323,
+    "maxStamina": 1000,
+    "stamina": 0.0,
+    "xp": 0.0
+}

@@ -1,0 +1,13 @@
+{
+    "name": "Infernal Horror",
+    "rarity": 3,
+    "baseAttack": 2027.34,
+    "baseMaxHp": 12380.92,
+    "baseSpeed": 99.2,
+    "attackGrowth": 0.0338,
+    "maxHpGrowth": 0.0669,
+    "speedGrowth": 0.0328,
+    "maxStamina": 1000,
+    "stamina": 0.0,
+    "xp": 0.0
+}

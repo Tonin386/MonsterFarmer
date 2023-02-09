@@ -1,0 +1,13 @@
+{
+    "name": "Niamh",
+    "rarity": 5,
+    "baseAttack": 4083.14,
+    "baseMaxHp": 18608.9,
+    "baseSpeed": 180.15,
+    "attackGrowth": 0.0775,
+    "maxHpGrowth": 0.1139,
+    "speedGrowth": 0.0579,
+    "maxStamina": 950,
+    "stamina": 0.0,
+    "xp": 0.0
+}

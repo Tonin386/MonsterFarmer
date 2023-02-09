@@ -1,0 +1,13 @@
+{
+    "name": "Elemental",
+    "rarity": 2,
+    "baseAttack": 1876.97,
+    "baseMaxHp": 11517.84,
+    "baseSpeed": 108.19,
+    "attackGrowth": 0.025,
+    "maxHpGrowth": 0.0459,
+    "speedGrowth": 0.0228,
+    "maxStamina": 1000,
+    "stamina": 0.0,
+    "xp": 0.0
+}

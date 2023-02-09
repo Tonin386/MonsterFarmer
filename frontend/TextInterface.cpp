@@ -36,8 +36,8 @@ void TextInterface::showStats(Monster* m)
 {
     cout << fixed;
     cout << setprecision(2);
-    cout << "******** Stats for " << m->getName() << "[" << m->getId() << "] ********" << endl;
-    cout << "+ Rarity: " << m->getRarity() << endl;
+    cout << "Stats for " << m->getName() << "[" << m->getId() << "]" << endl;
+    cout << "+ Rarity: " << m->getVerboseRarity() << endl;
     cout << "+ Attack value: " << m->getAttack() << endl;
     cout << "+ Health points: " << m->getHp() << "/" << m->getMaxHp() << endl;
     cout << "+ Speed: " << m->getSpeed() << endl;

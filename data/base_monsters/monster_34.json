@@ -1,0 +1,13 @@
+{
+    "name": "Incubus",
+    "rarity": 2,
+    "baseAttack": 2600.81,
+    "baseMaxHp": 14421.96,
+    "baseSpeed": 114.27,
+    "attackGrowth": 0.0184,
+    "maxHpGrowth": 0.0624,
+    "speedGrowth": 0.0154,
+    "maxStamina": 1000,
+    "stamina": 0.0,
+    "xp": 0.0
+}

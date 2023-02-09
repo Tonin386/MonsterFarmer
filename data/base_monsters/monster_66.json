@@ -1,0 +1,13 @@
+{
+    "name": "Faydragon",
+    "rarity": 4,
+    "baseAttack": 2456.98,
+    "baseMaxHp": 19245.55,
+    "baseSpeed": 117.01,
+    "attackGrowth": 0.0471,
+    "maxHpGrowth": 0.0925,
+    "speedGrowth": 0.0326,
+    "maxStamina": 1000,
+    "stamina": 0.0,
+    "xp": 0.0
+}

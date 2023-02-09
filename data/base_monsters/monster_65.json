@@ -1,0 +1,13 @@
+{
+    "name": "Eldrytch",
+    "rarity": 4,
+    "baseAttack": 2346.09,
+    "baseMaxHp": 13575.36,
+    "baseSpeed": 105.79,
+    "attackGrowth": 0.0474,
+    "maxHpGrowth": 0.0871,
+    "speedGrowth": 0.0374,
+    "maxStamina": 1000,
+    "stamina": 0.0,
+    "xp": 0.0
+}

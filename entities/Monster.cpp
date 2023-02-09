@@ -279,7 +279,7 @@ string Monster::getName() const
     return _name;
 }
 
-string Monster::getRarity() const
+string Monster::getVerboseRarity() const
 {
     switch (_rarity)
     {
@@ -301,6 +301,11 @@ string Monster::getRarity() const
     }
 
     return "Error";
+}
+
+int Monster::getRarity() const
+{
+    return _rarity;
 }
 
 int Monster::getTeam() const

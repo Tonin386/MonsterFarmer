@@ -1,0 +1,13 @@
+{
+    "name": "Pyroclast",
+    "rarity": 4,
+    "baseAttack": 2779.01,
+    "baseMaxHp": 14931.01,
+    "baseSpeed": 103.2,
+    "attackGrowth": 0.0516,
+    "maxHpGrowth": 0.0866,
+    "speedGrowth": 0.0354,
+    "maxStamina": 1000,
+    "stamina": 0.0,
+    "xp": 0.0
+}

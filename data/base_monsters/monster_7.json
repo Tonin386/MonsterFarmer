@@ -1,0 +1,13 @@
+{
+    "name": "Slime",
+    "rarity": 1,
+    "baseAttack": 2132.97,
+    "baseMaxHp": 12978.7,
+    "baseSpeed": 75.52,
+    "attackGrowth": 0.0265,
+    "maxHpGrowth": 0.0355,
+    "speedGrowth": 0.0106,
+    "maxStamina": 1000,
+    "stamina": 0.0,
+    "xp": 0.0
+}

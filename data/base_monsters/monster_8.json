@@ -1,0 +1,13 @@
+{
+    "name": "Rat",
+    "rarity": 1,
+    "baseAttack": 1874.92,
+    "baseMaxHp": 9199.36,
+    "baseSpeed": 53.08,
+    "attackGrowth": 0.0181,
+    "maxHpGrowth": 0.044,
+    "speedGrowth": 0.0259,
+    "maxStamina": 1000,
+    "stamina": 0.0,
+    "xp": 0.0
+}

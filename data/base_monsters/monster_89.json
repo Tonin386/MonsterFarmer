@@ -1,0 +1,13 @@
+{
+    "name": "Orion",
+    "rarity": 5,
+    "baseAttack": 2547.03,
+    "baseMaxHp": 21257.67,
+    "baseSpeed": 182.59,
+    "attackGrowth": 0.0813,
+    "maxHpGrowth": 0.09,
+    "speedGrowth": 0.0668,
+    "maxStamina": 950,
+    "stamina": 0.0,
+    "xp": 0.0
+}

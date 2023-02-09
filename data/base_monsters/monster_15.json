@@ -1,0 +1,13 @@
+{
+    "name": "Ogre",
+    "rarity": 1,
+    "baseAttack": 2404.34,
+    "baseMaxHp": 14051.23,
+    "baseSpeed": 64.43,
+    "attackGrowth": 0.018,
+    "maxHpGrowth": 0.0558,
+    "speedGrowth": 0.0124,
+    "maxStamina": 1000,
+    "stamina": 0.0,
+    "xp": 0.0
+}

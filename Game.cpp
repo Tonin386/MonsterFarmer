@@ -22,6 +22,18 @@ vector<Monster *> Game::getMonsterTemplates() const
     return _monsterTemplates;
 }
 
+vector<Monster *> Game::getMonsterTemplatesByRarity(int rarity)
+{
+    vector<Monster*> monsters;
+    for(int i = 0; i < _monsterTemplates.size(); i++)
+    {
+        if(_monsterTemplates[i]->getRarity() == rarity)
+            monsters.push_back(_monsterTemplates[i]);
+    }
+
+    return monsters;
+}
+
 vector<Item *> Game::getItemTemplates() const
 {
     return _itemTemplates;
@@ -63,14 +75,12 @@ int Game::loadMonsterTemplates()
 {
     using json = nlohmann::json;
     int monstersLoaded = 0;
-    int monsterRange = 1;
+    int monsterRange = 95;
 
-    for(int i = 1; i <= monsterRange; i++)
+    for(int i = 0; i < monsterRange; i++)
     {
-        string filePath = "data/base_monsters/" + to_string(monsterRange) + ".json";
+        string filePath = "data/base_monsters/monster_" + to_string(i) + ".json";
         ifstream file(filePath);
-
-        TextInterface::log("Trying to read from file: " + filePath);
 
         json j = json::parse(file);
 
@@ -118,29 +128,44 @@ void Game::startFight(Team *attackers, Team *defenders)
 
 void Game::startSummoning(int count)
 {
+    vector<Monster*> legends = getMonsterTemplatesByRarity(5);
+    vector<Monster*> epics = getMonsterTemplatesByRarity(4);
+    vector<Monster*> rares = getMonsterTemplatesByRarity(3);
+    vector<Monster*> uncommons = getMonsterTemplatesByRarity(2);
+    vector<Monster*> commons = getMonsterTemplatesByRarity(1);
+
     for (int i = 0; i < count; i++)
     {
+        Monster *m;
         int tier = _farm->summonMonster();
         if (tier < 10)
         {
             TextInterface::log("***** Legendary monster summoned! *****");
+            m = new Monster(legends[rand() % legends.size()]);
         }
         else if (tier > 10 && tier <= 60)
         {
             TextInterface::log("**** Epic monster summoned! ****");
+            m = new Monster(epics[rand() % epics.size()]);
         }
         else if (tier > 60 && tier <= 170)
         {
             TextInterface::log("*** Rare monster summoned! ***");
+            m = new Monster(rares[rand() % rares.size()]);
         }
         else if (tier > 170 && tier <= 400)
         {
             TextInterface::log("** Uncommon monster summoned! **");
+            m = new Monster(uncommons[rand() % uncommons.size()]);
         }
         else
         {
             TextInterface::log("* Common monster summoned! *");
+            m = new Monster(commons[rand() % commons.size()]);
         }
+
+        addActiveMonster(m);
+        TextInterface::showStats(m);
     }
 }
 

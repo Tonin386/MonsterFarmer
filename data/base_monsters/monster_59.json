@@ -1,0 +1,13 @@
+{
+    "name": "Unicorn",
+    "rarity": 3,
+    "baseAttack": 2253.69,
+    "baseMaxHp": 15920.24,
+    "baseSpeed": 115.52,
+    "attackGrowth": 0.0286,
+    "maxHpGrowth": 0.0244,
+    "speedGrowth": 0.0206,
+    "maxStamina": 1000,
+    "stamina": 0.0,
+    "xp": 0.0
+}

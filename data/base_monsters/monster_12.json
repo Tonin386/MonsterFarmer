@@ -1,0 +1,13 @@
+{
+    "name": "Snake",
+    "rarity": 1,
+    "baseAttack": 2166.48,
+    "baseMaxHp": 8994.88,
+    "baseSpeed": 81.96,
+    "attackGrowth": 0.0201,
+    "maxHpGrowth": 0.0634,
+    "speedGrowth": 0.0243,
+    "maxStamina": 1000,
+    "stamina": 0.0,
+    "xp": 0.0
+}

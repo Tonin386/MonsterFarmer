@@ -1,0 +1,13 @@
+{
+    "name": "Darkling",
+    "rarity": 3,
+    "baseAttack": 2069.55,
+    "baseMaxHp": 15757.81,
+    "baseSpeed": 76.52,
+    "attackGrowth": 0.0413,
+    "maxHpGrowth": 0.0509,
+    "speedGrowth": 0.0332,
+    "maxStamina": 1000,
+    "stamina": 0.0,
+    "xp": 0.0
+}

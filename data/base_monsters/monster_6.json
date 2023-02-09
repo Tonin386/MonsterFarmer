@@ -1,0 +1,13 @@
+{
+    "name": "Bat",
+    "rarity": 1,
+    "baseAttack": 2343.71,
+    "baseMaxHp": 11539.13,
+    "baseSpeed": 73.03,
+    "attackGrowth": 0.023,
+    "maxHpGrowth": 0.035,
+    "speedGrowth": 0.0153,
+    "maxStamina": 1000,
+    "stamina": 0.0,
+    "xp": 0.0
+}

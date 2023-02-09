@@ -98,7 +98,8 @@ public:
     virtual double getMaxHpGrowth() const;
     virtual double getSpeedGrowth() const;
     virtual std::string getName() const;
-    virtual std::string getRarity() const;
+    virtual int getRarity() const;
+    virtual std::string getVerboseRarity() const;
     virtual int getTeam() const;
     virtual int getId() const;
     virtual double getRating() const;

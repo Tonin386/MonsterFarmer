@@ -1,0 +1,13 @@
+{
+    "name": "Amara",
+    "rarity": 5,
+    "baseAttack": 4978.74,
+    "baseMaxHp": 22294.79,
+    "baseSpeed": 131.54,
+    "attackGrowth": 0.0891,
+    "maxHpGrowth": 0.1228,
+    "speedGrowth": 0.0578,
+    "maxStamina": 950,
+    "stamina": 0.0,
+    "xp": 0.0
+}

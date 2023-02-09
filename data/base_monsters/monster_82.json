@@ -1,0 +1,13 @@
+{
+    "name": "Zephyr",
+    "rarity": 5,
+    "baseAttack": 3628.2,
+    "baseMaxHp": 18760.5,
+    "baseSpeed": 170.14,
+    "attackGrowth": 0.0578,
+    "maxHpGrowth": 0.0995,
+    "speedGrowth": 0.0407,
+    "maxStamina": 950,
+    "stamina": 0.0,
+    "xp": 0.0
+}

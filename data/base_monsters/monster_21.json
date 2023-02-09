@@ -1,0 +1,13 @@
+{
+    "name": "Mummy",
+    "rarity": 2,
+    "baseAttack": 1836.17,
+    "baseMaxHp": 9988.62,
+    "baseSpeed": 60.97,
+    "attackGrowth": 0.0218,
+    "maxHpGrowth": 0.0609,
+    "speedGrowth": 0.0124,
+    "maxStamina": 1000,
+    "stamina": 0.0,
+    "xp": 0.0
+}

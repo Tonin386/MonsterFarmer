@@ -1,0 +1,13 @@
+{
+    "name": "Goblin King",
+    "rarity": 2,
+    "baseAttack": 2595.51,
+    "baseMaxHp": 10016.58,
+    "baseSpeed": 107.83,
+    "attackGrowth": 0.0147,
+    "maxHpGrowth": 0.0397,
+    "speedGrowth": 0.025,
+    "maxStamina": 1000,
+    "stamina": 0.0,
+    "xp": 0.0
+}

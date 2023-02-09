@@ -1,0 +1,13 @@
+{
+    "name": "Lycoris",
+    "rarity": 5,
+    "baseAttack": 3801.73,
+    "baseMaxHp": 15000.22,
+    "baseSpeed": 108.13,
+    "attackGrowth": 0.0912,
+    "maxHpGrowth": 0.1233,
+    "speedGrowth": 0.0488,
+    "maxStamina": 950,
+    "stamina": 0.0,
+    "xp": 0.0
+}

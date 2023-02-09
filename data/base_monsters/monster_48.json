@@ -1,0 +1,13 @@
+{
+    "name": "Horned Devil",
+    "rarity": 3,
+    "baseAttack": 2409.26,
+    "baseMaxHp": 14599.23,
+    "baseSpeed": 113.24,
+    "attackGrowth": 0.0237,
+    "maxHpGrowth": 0.0216,
+    "speedGrowth": 0.0342,
+    "maxStamina": 1000,
+    "stamina": 0.0,
+    "xp": 0.0
+}

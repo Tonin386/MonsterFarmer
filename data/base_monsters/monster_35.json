@@ -1,0 +1,13 @@
+{
+    "name": "Hag",
+    "rarity": 2,
+    "baseAttack": 2575.83,
+    "baseMaxHp": 11440.99,
+    "baseSpeed": 66.63,
+    "attackGrowth": 0.0215,
+    "maxHpGrowth": 0.0282,
+    "speedGrowth": 0.0292,
+    "maxStamina": 1000,
+    "stamina": 0.0,
+    "xp": 0.0
+}

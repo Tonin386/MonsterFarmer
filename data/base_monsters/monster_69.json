@@ -1,0 +1,13 @@
+{
+    "name": "Luminous",
+    "rarity": 4,
+    "baseAttack": 2409.52,
+    "baseMaxHp": 18259.68,
+    "baseSpeed": 95.18,
+    "attackGrowth": 0.0645,
+    "maxHpGrowth": 0.0583,
+    "speedGrowth": 0.0297,
+    "maxStamina": 1000,
+    "stamina": 0.0,
+    "xp": 0.0
+}

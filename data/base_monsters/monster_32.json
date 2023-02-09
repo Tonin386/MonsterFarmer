@@ -1,0 +1,13 @@
+{
+    "name": "Dragon",
+    "rarity": 2,
+    "baseAttack": 1867.67,
+    "baseMaxHp": 10037.95,
+    "baseSpeed": 110.21,
+    "attackGrowth": 0.0198,
+    "maxHpGrowth": 0.0656,
+    "speedGrowth": 0.0209,
+    "maxStamina": 1000,
+    "stamina": 0.0,
+    "xp": 0.0
+}

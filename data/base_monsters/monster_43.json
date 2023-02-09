@@ -1,0 +1,13 @@
+{
+    "name": "Chimera",
+    "rarity": 3,
+    "baseAttack": 2572.09,
+    "baseMaxHp": 14267.92,
+    "baseSpeed": 104.75,
+    "attackGrowth": 0.0399,
+    "maxHpGrowth": 0.0359,
+    "speedGrowth": 0.0339,
+    "maxStamina": 1000,
+    "stamina": 0.0,
+    "xp": 0.0
+}

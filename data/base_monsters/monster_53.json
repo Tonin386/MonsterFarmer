@@ -1,0 +1,13 @@
+{
+    "name": "Nightmare",
+    "rarity": 3,
+    "baseAttack": 2290.46,
+    "baseMaxHp": 13326.82,
+    "baseSpeed": 79.16,
+    "attackGrowth": 0.0428,
+    "maxHpGrowth": 0.0253,
+    "speedGrowth": 0.0261,
+    "maxStamina": 1000,
+    "stamina": 0.0,
+    "xp": 0.0
+}

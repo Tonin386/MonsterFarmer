@@ -1,0 +1,13 @@
+{
+    "name": "Wyvern",
+    "rarity": 3,
+    "baseAttack": 2295.43,
+    "baseMaxHp": 11109.06,
+    "baseSpeed": 88.4,
+    "attackGrowth": 0.0377,
+    "maxHpGrowth": 0.0449,
+    "speedGrowth": 0.0367,
+    "maxStamina": 1000,
+    "stamina": 0.0,
+    "xp": 0.0
+}

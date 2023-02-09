@@ -1,0 +1,13 @@
+{
+    "name": "Necroflora",
+    "rarity": 4,
+    "baseAttack": 2626.7,
+    "baseMaxHp": 14464.97,
+    "baseSpeed": 124.17,
+    "attackGrowth": 0.0581,
+    "maxHpGrowth": 0.0668,
+    "speedGrowth": 0.0312,
+    "maxStamina": 1000,
+    "stamina": 0.0,
+    "xp": 0.0
+}

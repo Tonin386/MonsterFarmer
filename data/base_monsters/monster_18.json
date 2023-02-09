@@ -1,0 +1,13 @@
+{
+    "name": "Cyclops",
+    "rarity": 1,
+    "baseAttack": 1629.6,
+    "baseMaxHp": 13720.28,
+    "baseSpeed": 64.2,
+    "attackGrowth": 0.0296,
+    "maxHpGrowth": 0.0392,
+    "speedGrowth": 0.0239,
+    "maxStamina": 1000,
+    "stamina": 0.0,
+    "xp": 0.0
+}

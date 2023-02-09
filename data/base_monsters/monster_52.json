@@ -1,0 +1,13 @@
+{
+    "name": "Medusa",
+    "rarity": 3,
+    "baseAttack": 2423.2,
+    "baseMaxHp": 15580.35,
+    "baseSpeed": 106.55,
+    "attackGrowth": 0.0282,
+    "maxHpGrowth": 0.0565,
+    "speedGrowth": 0.0331,
+    "maxStamina": 1000,
+    "stamina": 0.0,
+    "xp": 0.0
+}

@@ -1,0 +1,13 @@
+{
+    "name": "Riftwalker",
+    "rarity": 4,
+    "baseAttack": 2045.93,
+    "baseMaxHp": 12924.63,
+    "baseSpeed": 116.07,
+    "attackGrowth": 0.0705,
+    "maxHpGrowth": 0.069,
+    "speedGrowth": 0.0404,
+    "maxStamina": 1000,
+    "stamina": 0.0,
+    "xp": 0.0
+}
