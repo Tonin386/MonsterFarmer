@@ -1,6 +1,12 @@
 #include "Game.hpp"
 
 #include "../views/TextInterface.hpp"
+#include "entities/monsters/Monster.hpp"
+#include "entities/monsters/Team.hpp"
+#include "entities/players/Player.hpp"
+#include "entities/items/Item.hpp"
+#include  "scenarios/Farm.hpp"
+#include  "scenarios/Fight.hpp"
 #include "../libraries/json.hpp"
 
 #include <fstream>
@@ -24,10 +30,10 @@ vector<Monster *> Game::getMonsterTemplates() const
 
 vector<Monster *> Game::getMonsterTemplatesByRarity(int rarity)
 {
-    vector<Monster*> monsters;
-    for(int i = 0; i < _monsterTemplates.size(); i++)
+    vector<Monster *> monsters;
+    for (int i = 0; i < _monsterTemplates.size(); i++)
     {
-        if(_monsterTemplates[i]->getRarity() == rarity)
+        if (_monsterTemplates[i]->getRarity() == rarity)
             monsters.push_back(_monsterTemplates[i]);
     }
 
@@ -39,12 +45,12 @@ vector<Item *> Game::getItemTemplates() const
     return _itemTemplates;
 }
 
-vector<Monster*> Game::getActiveMonsters() const
+vector<Monster *> Game::getActiveMonsters() const
 {
     return _activeMonsters;
 }
 
-vector<Item*> Game::getActiveItems() const
+vector<Item *> Game::getActiveItems() const
 {
     return _activeItems;
 }
@@ -59,16 +65,22 @@ void Game::addItemTemplate(Item *i)
     _itemTemplates.push_back(i);
 }
 
-void Game::addActiveMonster(Monster* m)
+void Game::addActiveMonster(Monster *m)
 {
     _activeMonsters.push_back(m);
     int id = _activeMonsters.size();
     m->setId(id);
 }
 
-void Game::addActiveItem(Item* i)
+void Game::addActiveItem(Item *i)
 {
     _activeItems.push_back(i);
+}
+
+void Game::setPlayer(Player *p)
+{
+    _player = p;
+    _player->setGame(this);
 }
 
 int Game::loadMonsterTemplates()
@@ -77,16 +89,16 @@ int Game::loadMonsterTemplates()
     int monstersLoaded = 0;
     int monsterRange = 95;
 
-    for(int i = 0; i < monsterRange; i++)
+    for (int i = 0; i < monsterRange; i++)
     {
         string filePath = "data/base_monsters/monster_" + to_string(i) + ".json";
         ifstream file(filePath);
 
         json j = json::parse(file);
 
-
         string name = j["name"].get<string>();
         int rarity = j["rarity"].get<int>();
+        int type = j["type"].get<int>();
         double baseAtk = j["baseAttack"].get<double>();
         double baseMaxHp = j["baseMaxHp"].get<double>();
         double baseSpeed = j["baseSpeed"].get<double>();
@@ -97,7 +109,7 @@ int Game::loadMonsterTemplates()
         double stamina = j["stamina"].get<double>();
         double xp = j["xp"].get<double>();
 
-        Monster *m = new Monster(name, rarity, baseAtk, baseMaxHp, baseSpeed, atkGrowth, maxHpGrowth, speedGrowth, maxStamina, stamina, xp);
+        Monster *m = new Monster(name, rarity, type, baseAtk, baseMaxHp, baseSpeed, atkGrowth, maxHpGrowth, speedGrowth, maxStamina, stamina, xp);
         addMonsterTemplate(m);
         monstersLoaded++;
     }
@@ -123,16 +135,18 @@ void Game::startFight(Team *attackers, Team *defenders)
     }
 
     TextInterface::log("Done.");
-    TextInterface::showStats(f);
+    TextInterface::log(f);
 }
 
-void Game::startSummoning(int count)
+vector<Monster*> Game::summonMonsters(int count)
 {
-    vector<Monster*> legends = getMonsterTemplatesByRarity(5);
-    vector<Monster*> epics = getMonsterTemplatesByRarity(4);
-    vector<Monster*> rares = getMonsterTemplatesByRarity(3);
-    vector<Monster*> uncommons = getMonsterTemplatesByRarity(2);
-    vector<Monster*> commons = getMonsterTemplatesByRarity(1);
+    vector<Monster *> legends = getMonsterTemplatesByRarity(5);
+    vector<Monster *> epics = getMonsterTemplatesByRarity(4);
+    vector<Monster *> rares = getMonsterTemplatesByRarity(3);
+    vector<Monster *> uncommons = getMonsterTemplatesByRarity(2);
+    vector<Monster *> commons = getMonsterTemplatesByRarity(1);
+
+    vector<Monster*> monsters;
 
     for (int i = 0; i < count; i++)
     {
@@ -164,9 +178,11 @@ void Game::startSummoning(int count)
             m = new Monster(commons[rand() % commons.size()]);
         }
 
-        addActiveMonster(m);
-        TextInterface::showStats(m);
+        monsters.push_back(m);
+        TextInterface::log(m);
     }
+
+    return monsters;
 }
 
 Game::~Game()

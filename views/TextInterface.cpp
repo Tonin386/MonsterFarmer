@@ -1,6 +1,10 @@
 #include "TextInterface.hpp"
 
+#include "../game/entities/monsters/Monster.hpp"
+#include "../game/entities/monsters/Team.hpp"
+#include "../game/entities/players/Player.hpp"
 #include "../game/scenarios/Fight.hpp"
+
 #include <iostream>
 #include <iomanip>
 #include <map>
@@ -14,14 +18,14 @@ void TextInterface::log(string s)
     cout << s << endl;
 }
 
-void TextInterface::showStats(Fight *f)
+void TextInterface::log(Fight *f)
 {
-    vector<Monster*> all = f->getMonsters();
-    Team* attackers = f->getAttackers();
-    Team* defenders = f->getDefenders();
+    vector<Monster *> all = f->getMonsters();
+    Team *attackers = f->getAttackers();
+    Team *defenders = f->getDefenders();
     map<int, int> attacksCount = f->getAttacksCount();
     map<int, double> damageDealt = f->getDamageDealt();
-    
+
     cout << fixed;
     cout << setprecision(2);
 
@@ -32,12 +36,14 @@ void TextInterface::showStats(Fight *f)
     }
 }
 
-void TextInterface::showStats(Monster* m)
+void TextInterface::log(Monster *m)
 {
     cout << fixed;
     cout << setprecision(2);
     cout << "Stats for " << m->getName() << "[" << m->getId() << "]" << endl;
     cout << "+ Rarity: " << m->getVerboseRarity() << endl;
+    cout << "+ Class: " << m->getVerboseType() << endl;
+    cout << "+ Overall rating: " << m->getRating() << endl;
     cout << "+ Attack value: " << m->getAttack() << endl;
     cout << "+ Health points: " << m->getHp() << "/" << m->getMaxHp() << endl;
     cout << "+ Speed: " << m->getSpeed() << endl;
@@ -46,6 +52,27 @@ void TextInterface::showStats(Monster* m)
     cout << "--------------------------" << endl;
 }
 
+void TextInterface::log(Player *p)
+{
+    vector<Team*> teams = p->getTeams();
+    cout << "List of teams (" << teams.size() << ") of " << p->getName() << endl;
+    for(int i = 0; i < teams.size(); i++)
+    {
+        log(teams[i]);
+    }
+}
+
+void TextInterface::log(Team *t)
+{
+    cout << "--------------- Beginning of team -----------------" << endl;
+
+    for(int i = 0; i < 4; i++)
+    {
+        log((*t)[i]);
+    }
+
+    cout << "----------------- End of team -----------------" << endl;
+}
 
 TextInterface::~TextInterface()
 {

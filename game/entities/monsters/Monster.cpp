@@ -1,6 +1,8 @@
 #include "Monster.hpp"
 
 #include "../../../views/TextInterface.hpp"
+#include "../items/Item.hpp"
+
 #include <iostream>
 #include <cmath>
 
@@ -21,6 +23,7 @@ Monster::Monster()
 
     _name = "Frog";
     _rarity = 1;
+    _type = 0;
 
     _armor = new Item();
     _weapon = new Item();
@@ -30,14 +33,13 @@ Monster::Monster()
 
     _team = 0;
     _id = -1;
-    _rating = (_atk + _maxHp/10 + _speed*10) / 30;
 
     _level = 0;
     _xp = 0;
 }
 
-Monster::Monster(string name, int rarity, double baseAtk, double baseMaxHp, double baseSpeed, double atkGrowth, double maxHpGrowth, double speedGrowth, double maxStamina, double stamina, double xp)
-    : b_atk(baseAtk), b_maxHp(baseMaxHp), b_speed(baseSpeed), _maxStamina(maxStamina), _stamina(stamina), _name(name), _rarity(rarity), _xp(xp)
+Monster::Monster(string name, int rarity, int type, double baseAtk, double baseMaxHp, double baseSpeed, double atkGrowth, double maxHpGrowth, double speedGrowth, double maxStamina, double stamina, double xp)
+    : b_atk(baseAtk), b_maxHp(baseMaxHp), b_speed(baseSpeed), _maxStamina(maxStamina), _stamina(stamina), _name(name), _rarity(rarity), _type(type), _xp(xp)
 {
     _atk = b_atk;
     _maxHp = b_maxHp;
@@ -55,7 +57,6 @@ Monster::Monster(string name, int rarity, double baseAtk, double baseMaxHp, doub
 
     _team = 0;
     _id = -1;
-    _rating = (_atk + _maxHp/10 + _speed*10) / 30;
 }
 
 Monster::Monster(Monster *m)
@@ -77,6 +78,7 @@ Monster::Monster(Monster *m)
 
     _name = m->_name;
     _rarity = m->_rarity;
+    _type = m->_type;
 
     _armor = m->_armor;
     _weapon = m->_weapon;
@@ -85,7 +87,6 @@ Monster::Monster(Monster *m)
     _talisman = m->_talisman;
 
     _team = m->_team;
-    _rating = m->_rating;
 
     _xp = m->_xp;
     _level = m->_level;
@@ -308,6 +309,25 @@ int Monster::getRarity() const
     return _rarity;
 }
 
+int Monster::getType() const
+{
+    return _type;
+}
+
+string Monster::getVerboseType() const
+{
+    switch(_type) {
+        case TANKER:
+            return "Tanker";
+        case DAMAGE:
+            return "Damage";
+        case HEALER:
+            return "Healer";
+    }
+
+    return "Error";
+}
+
 int Monster::getTeam() const
 {
     return _team;
@@ -320,7 +340,12 @@ int Monster::getId() const
 
 double Monster::getRating() const
 {
-    return _rating;
+    return (b_atk + b_maxHp/100 + b_speed*10) / 30;
+}
+
+double Monster::getXp() const
+{
+    return _xp;
 }
 
 int Monster::getLevel() const

@@ -1,7 +1,9 @@
 #ifndef MONSTER_HPP
 #define MONSTER8HPP
 
-#include "../items/Item.hpp"
+#include <string>
+
+class Item;
 
 class Monster
 {
@@ -23,6 +25,7 @@ protected:
 
     std::string _name;
     int _rarity;
+    int _type;
 
     Item *_armor;
     Item *_weapon;
@@ -32,7 +35,6 @@ protected:
 
     int _team;
     int _id;
-    double _rating;
 
     double _xp;
     int _level;
@@ -44,6 +46,7 @@ public:
     Monster(
         std::string name,
         int rarity,
+        int type,
         double baseAtk,
         double baseMaxHp,
         double baseSpeed,
@@ -100,9 +103,12 @@ public:
     virtual std::string getName() const;
     virtual int getRarity() const;
     virtual std::string getVerboseRarity() const;
+    virtual int getType() const;
+    virtual std::string getVerboseType() const;
     virtual int getTeam() const;
     virtual int getId() const;
     virtual double getRating() const;
+    virtual double getXp() const;
     virtual int getLevel() const;
 
     virtual void setTeam(int t);
@@ -114,6 +120,10 @@ public:
     virtual bool operator>(Monster const &m) const;
     virtual void operator=(Monster const &m);
     virtual void operator=(Monster *const &m);
+
+    static const int TANKER = 0;
+    static const int DAMAGE = 1;
+    static const int HEALER = 2;
 
     ~Monster();
 };

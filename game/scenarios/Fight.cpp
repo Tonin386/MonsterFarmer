@@ -1,7 +1,11 @@
 #include "Fight.hpp"
-#include <algorithm>
 
 #include "../../views/TextInterface.hpp"
+#include "../entities/monsters/Monster.hpp"
+#include "../entities/monsters/Team.hpp"
+
+#include <algorithm>
+
 
 using namespace std;
 

@@ -1,8 +1,9 @@
 #ifndef TEAM_HPP
 #define TEAM_HPP
 
-#include "Monster.hpp"
 #include <vector>
+
+class Monster;
 
 class Team
 {

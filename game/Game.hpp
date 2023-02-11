@@ -1,11 +1,14 @@
 #ifndef GAME_HPP
 #define GAME_HPP
 
-#include "entities/items/Item.hpp"
-#include "scenarios/Farm.hpp"
-#include "scenarios/Fight.hpp"
-
 #include <vector>
+
+class Monster;
+class Item;
+class Player;
+class Fight;
+class Farm;
+class Team;
 
 class Game
 {
@@ -18,6 +21,8 @@ protected:
 
     std::vector<Fight *> _fights;
     Farm *_farm;
+
+    Player *_player;
 
 public:
     Game();
@@ -36,11 +41,14 @@ public:
     virtual void addActiveMonster(Monster* m);
     virtual void addActiveItem(Item* i);
 
+    virtual void setPlayer(Player* p);
+
     virtual int loadMonsterTemplates();
     virtual int loadActiveMonsters();
 
     virtual void startFight(Team *m1, Team *m2);
-    virtual void startSummoning(int count);
+
+    virtual std::vector<Monster*> summonMonsters(int count = 1);
 
     ~Game();
 };

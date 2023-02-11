@@ -1,8 +1,11 @@
 #ifndef FIGHT_HPP
 #define FIGHT_HPP
 
-#include "../entities/monsters/Team.hpp"
 #include <map>
+#include <vector>
+
+class Monster;
+class Team;
 
 class Fight
 {

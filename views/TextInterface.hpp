@@ -1,10 +1,12 @@
 #ifndef TEXTINTERFACE_HPP
 #define TEXTINTERFACE_HPP
 
+#include <string>
+
 class Monster;
 class Fight;
-
-#include <string>
+class Player;
+class Team;
 
 class TextInterface
 {
@@ -14,8 +16,10 @@ public:
     TextInterface();
 
     static void log(std::string s);
-    static void showStats(Monster *m);
-    static void showStats(Fight *f);
+    static void log(Monster *m);
+    static void log(Fight *f);
+    static void log(Player *p);
+    static void log(Team *t);
 
     ~TextInterface();
 };
