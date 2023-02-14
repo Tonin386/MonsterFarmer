@@ -30,7 +30,7 @@ int main(int argc, char const *argv[])
     Player *p1 = new Player("Fiddle");
 
     game->setPlayer(p1);
-    p1->summonMonsters(10);
+    game->loadActiveMonsters();
     p1->generateTeams();
 
     p1->saveState();

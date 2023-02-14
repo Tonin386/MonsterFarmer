@@ -5,8 +5,8 @@
 #include "entities/monsters/Team.hpp"
 #include "entities/players/Player.hpp"
 #include "entities/items/Item.hpp"
-#include  "scenarios/Farm.hpp"
-#include  "scenarios/Fight.hpp"
+#include "scenarios/Farm.hpp"
+#include "scenarios/Fight.hpp"
 #include "../libraries/json.hpp"
 
 #include <fstream>
@@ -119,7 +119,40 @@ int Game::loadMonsterTemplates()
 
 int Game::loadActiveMonsters()
 {
-    return 0;
+    using json = nlohmann::json;
+    int monstersLoaded = 0;
+
+    string monstersFilePath = "save/monsters.json";
+    string playerFilePath = "save/player.json";
+    ifstream monstersFile(monstersFilePath);
+    ifstream playerFile(playerFilePath);
+
+    json jMonsters = json::parse(monstersFile);
+    json jPlayer = json::parse(playerFile);
+    
+    int monsterRange = jPlayer["monsters"].get<int>();
+
+    for (int i = 0; i < monsterRange; i++)
+    {
+        string name = jMonsters[i]["name"].get<string>();
+        int rarity = jMonsters[i]["rarity"].get<int>();
+        int type = jMonsters[i]["type"].get<int>();
+        double baseAtk = jMonsters[i]["b_atk"].get<double>();
+        double baseMaxHp = jMonsters[i]["b_maxHp"].get<double>();
+        double baseSpeed = jMonsters[i]["b_speed"].get<double>();
+        double atkGrowth = jMonsters[i]["g_atk"].get<double>();
+        double maxHpGrowth = jMonsters[i]["g_maxHp"].get<double>();
+        double speedGrowth = jMonsters[i]["g_speed"].get<double>();
+        double maxStamina = jMonsters[i]["maxStamina"].get<double>();
+        double stamina = jMonsters[i]["stamina"].get<double>();
+        double xp = jMonsters[i]["xp"].get<double>();
+
+        Monster *m = new Monster(name, rarity, type, baseAtk, baseMaxHp, baseSpeed, atkGrowth, maxHpGrowth, speedGrowth, maxStamina, stamina, xp);
+        _player->addMonster(m);
+        monstersLoaded++;
+    }
+
+    return monstersLoaded;
 }
 
 void Game::startFight(Team *attackers, Team *defenders)
@@ -138,7 +171,7 @@ void Game::startFight(Team *attackers, Team *defenders)
     TextInterface::log(f);
 }
 
-vector<Monster*> Game::summonMonsters(int count)
+vector<Monster *> Game::summonMonsters(int count)
 {
     vector<Monster *> legends = getMonsterTemplatesByRarity(5);
     vector<Monster *> epics = getMonsterTemplatesByRarity(4);
@@ -146,7 +179,7 @@ vector<Monster*> Game::summonMonsters(int count)
     vector<Monster *> uncommons = getMonsterTemplatesByRarity(2);
     vector<Monster *> commons = getMonsterTemplatesByRarity(1);
 
-    vector<Monster*> monsters;
+    vector<Monster *> monsters;
 
     for (int i = 0; i < count; i++)
     {
