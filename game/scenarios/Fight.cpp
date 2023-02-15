@@ -26,6 +26,8 @@ Fight::Fight(Team *a, Team *d) : _attackers(a), _defenders(d)
         _damageDealt[m1->getId()] = 0;
         _damageDealt[m2->getId()] = 0;
     }
+
+    _ended = false;
 }
 
 bool Fight::playTurn()
@@ -74,10 +76,14 @@ bool Fight::playTurn()
         }
     }
 
-    // int i;
-    // cin >> i;
+    _ended = (_attackers->hasLost() || _defenders->hasLost());
 
-    return !(_attackers->hasLost() || _defenders->hasLost());
+    return !_ended;
+}
+
+bool Fight::hasEnded() const
+{
+    return _ended;
 }
 
 int Fight::getTurnCount() const
@@ -100,9 +106,19 @@ Team* Fight::getAttackers() const
     return _attackers;
 }
 
+double Fight::getAttackersRating()
+{
+    return ((*_attackers)[0]->getRating() + (*_attackers)[1]->getRating() + (*_attackers)[2]->getRating() + (*_attackers)[3]->getRating()) / 4;
+}
+
 Team* Fight::getDefenders() const
 {
     return _defenders;
+}
+
+double Fight::getDefendersRating()
+{
+    return ((*_defenders)[0]->getRating() + (*_defenders)[1]->getRating() + (*_defenders)[2]->getRating() + (*_defenders)[3]->getRating()) / 4;
 }
 
 vector<Monster*> Fight::getMonsters() const

@@ -17,6 +17,8 @@ public:
     virtual void addMonster(Monster *m);
     virtual void removeMonster(Monster *m);
 
+    virtual void prepareForNextFight();
+
     virtual bool hasLost() const;
 
     virtual Monster *getMonster(int id) const;

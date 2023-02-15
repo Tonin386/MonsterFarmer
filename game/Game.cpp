@@ -40,6 +40,42 @@ vector<Monster *> Game::getMonsterTemplatesByRarity(int rarity)
     return monsters;
 }
 
+vector<Monster *> Game::getTanksTemplates()
+{
+    vector<Monster *> monsters;
+    for (int i = 0; i < _monsterTemplates.size(); i++)
+    {
+        if (_monsterTemplates[i]->getType() == Monster::TANKER)
+            monsters.push_back(_monsterTemplates[i]);
+    }
+
+    return monsters;
+}
+
+vector<Monster *> Game::getDamagesTemplates()
+{
+    vector<Monster *> monsters;
+    for (int i = 0; i < _monsterTemplates.size(); i++)
+    {
+        if (_monsterTemplates[i]->getType() == Monster::DAMAGE)
+            monsters.push_back(_monsterTemplates[i]);
+    }
+
+    return monsters;
+}
+
+vector<Monster *> Game::getHealersTemplates()
+{
+    vector<Monster *> monsters;
+    for (int i = 0; i < _monsterTemplates.size(); i++)
+    {
+        if (_monsterTemplates[i]->getType() == Monster::HEALER)
+            monsters.push_back(_monsterTemplates[i]);
+    }
+
+    return monsters;
+}
+
 vector<Item *> Game::getItemTemplates() const
 {
     return _itemTemplates;
@@ -129,7 +165,7 @@ int Game::loadActiveMonsters()
 
     json jMonsters = json::parse(monstersFile);
     json jPlayer = json::parse(playerFile);
-    
+
     int monsterRange = jPlayer["monsters"].get<int>();
 
     for (int i = 0; i < monsterRange; i++)
@@ -166,9 +202,25 @@ void Game::startFight(Team *attackers, Team *defenders)
     {
         // TextInterface::log("Turn ended.");
     }
-
-    TextInterface::log("Done.");
     TextInterface::log(f);
+
+    double coeff = 0.66;
+
+    if (!f->getAttackers()->hasLost())
+    {
+        _player->summonMonsters(1);
+        coeff = 1.25;
+    }
+
+    double xp = (f->getDefendersRating() / f->getAttackersRating()) * f->getDefendersRating() * 10 * coeff;
+    (*(f->getAttackers()))[0]->levelUp(xp);
+    (*(f->getAttackers()))[1]->levelUp(xp);
+    (*(f->getAttackers()))[2]->levelUp(xp);
+    (*(f->getAttackers()))[3]->levelUp(xp);
+
+
+    f->getAttackers()->prepareForNextFight();
+    _player->generateTeams();
 }
 
 vector<Monster *> Game::summonMonsters(int count)
@@ -216,6 +268,38 @@ vector<Monster *> Game::summonMonsters(int count)
     }
 
     return monsters;
+}
+
+Team *Game::generateTeam()
+{
+    vector<Monster *> monsters;
+    int sizeMonsters;
+
+    monsters = getTanksTemplates();
+    sizeMonsters = monsters.size();
+    Monster *t1 = new Monster(monsters[rand() % sizeMonsters]);
+    Monster *t2 = new Monster(monsters[rand() % sizeMonsters]);
+
+    monsters = getDamagesTemplates();
+    sizeMonsters = monsters.size();
+    Monster *d = new Monster(monsters[rand() % sizeMonsters]);
+
+    monsters = getHealersTemplates();
+    sizeMonsters = monsters.size();
+    Monster *h = new Monster(monsters[rand() % sizeMonsters]);
+
+    addActiveMonster(t1);
+    addActiveMonster(t2);
+    addActiveMonster(d);
+    addActiveMonster(h);
+
+    Team *t = new Team();
+    t->addMonster(t1);
+    t->addMonster(t2);
+    t->addMonster(d);
+    t->addMonster(h);
+
+    return t;
 }
 
 Game::~Game()

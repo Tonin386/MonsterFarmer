@@ -82,8 +82,14 @@ int Player::generateTeams()
         }
     }
 
-    int nbTeams = 0;
+    sort(tankers.begin(), tankers.end(), [](const Monster *a, const Monster *b)
+         { return a->getRating() > b->getRating(); });
+    sort(damages.begin(), damages.end(), [](const Monster *a, const Monster *b)
+         { return a->getRating() > b->getRating(); });
+    sort(healers.begin(), healers.end(), [](const Monster *a, const Monster *b)
+         { return a->getRating() > b->getRating(); });
 
+    int nbTeams = 0;
     while (nbTankers > 2 && nbDamages > 1 && nbHealers > 1)
     {
         Team *t = new Team();

@@ -34,6 +34,14 @@ void TextInterface::log(Fight *f)
         int id = all[i]->getId();
         cout << all[i]->getName() << " attacked " << attacksCount[id] << " times for a total of " << damageDealt[id] << " of damage done." << endl;
     }
+
+    if(f->hasEnded())
+    {
+        if (attackers->hasLost())
+            cout << "Attackers lost." << endl;
+        else
+            cout << "Attackers won." << endl;
+    }
 }
 
 void TextInterface::log(Monster *m)
@@ -54,9 +62,9 @@ void TextInterface::log(Monster *m)
 
 void TextInterface::log(Player *p)
 {
-    vector<Team*> teams = p->getTeams();
+    vector<Team *> teams = p->getTeams();
     cout << "List of teams (" << teams.size() << ") of " << p->getName() << endl;
-    for(int i = 0; i < teams.size(); i++)
+    for (int i = 0; i < teams.size(); i++)
     {
         log(teams[i]);
     }
@@ -66,7 +74,7 @@ void TextInterface::log(Team *t)
 {
     cout << "--------------- Beginning of team -----------------" << endl;
 
-    for(int i = 0; i < 4; i++)
+    for (int i = 0; i < 4; i++)
     {
         log((*t)[i]);
     }

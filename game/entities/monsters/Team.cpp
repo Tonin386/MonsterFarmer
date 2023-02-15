@@ -40,6 +40,14 @@ void Team::removeMonster(Monster *m)
     }
 }
 
+void Team::prepareForNextFight()
+{
+    _monsters[0]->reset();
+    _monsters[1]->reset();
+    _monsters[2]->reset();
+    _monsters[3]->reset();
+}
+
 bool Team::hasLost() const
 {
     for (int i = 0; i < 4; i++)

@@ -39,7 +39,7 @@ Monster::Monster()
 }
 
 Monster::Monster(string name, int rarity, int type, double baseAtk, double baseMaxHp, double baseSpeed, double atkGrowth, double maxHpGrowth, double speedGrowth, double maxStamina, double stamina, double xp)
-    : b_atk(baseAtk), b_maxHp(baseMaxHp), b_speed(baseSpeed), _maxStamina(maxStamina), _stamina(stamina), _name(name), _rarity(rarity), _type(type), _xp(xp)
+    : b_atk(baseAtk), b_maxHp(baseMaxHp), b_speed(baseSpeed), _maxStamina(maxStamina), _stamina(stamina), _name(name), _rarity(rarity), _type(type), g_atk(atkGrowth), g_maxHp(maxHpGrowth), g_speed(speedGrowth)
 {
     _atk = b_atk;
     _maxHp = b_maxHp;
@@ -47,7 +47,7 @@ Monster::Monster(string name, int rarity, int type, double baseAtk, double baseM
     _hp = _maxHp;
 
     _level = 0;
-    levelUp(false);
+    levelUp(xp);
 
     _armor = new Item();
     _weapon = new Item();
@@ -71,7 +71,7 @@ Monster::Monster(Monster *m)
     g_atk = m->g_atk;
     g_maxHp = m->g_maxHp;
     g_speed = m->g_speed;
-    
+
     b_atk = m->b_atk;
     b_maxHp = m->b_maxHp;
     b_speed = m->b_speed;
@@ -124,35 +124,29 @@ bool Monster::canPlay() const
     return _stamina >= _maxStamina;
 }
 
-double Monster::calcTotalXpForLevel(int level)
+int Monster::levelUp(double xp)
 {
-    return level^2 * 1000;
-}
-
-int Monster::levelUp(bool verbose)
-{  
-    int i = 0;
-
-    while(calcTotalXpForLevel(i + _level) < _xp) {i++;}
-    if(i >= 1)
+    _xp += xp;
+    int newLevel = floor((sqrt(625 + 100 * _xp) - 25) / 50);
+    if (newLevel > _level)
     {
-        _level += i;
-        _atk = b_atk * (1 + _level * g_atk);
-        _maxHp = b_maxHp * (1 + _level * g_maxHp);
-        _speed = b_speed * (1 + _level * g_speed);
-        
-        if(verbose)
+        for (int i = _level; i < newLevel; i++)
         {
-            TextInterface::log(_name + " gained " + to_string(i) + " level(s) and now is level " + to_string(_level));
+            _atk *= (1 + g_atk);
+            _maxHp *= (1 + g_maxHp);
+            _speed *= (1 + g_speed);
         }
     }
 
-    return i;
+    _level = newLevel;
+
+    return newLevel;
 }
 
-void Monster::addXp(double xp)
+void Monster::reset(bool levelReset)
 {
-    _xp += xp;
+    _hp = _maxHp;
+    _stamina = 0;
 }
 
 void Monster::equipArmor(Item *a)
@@ -316,13 +310,14 @@ int Monster::getType() const
 
 string Monster::getVerboseType() const
 {
-    switch(_type) {
-        case TANKER:
-            return "Tanker";
-        case DAMAGE:
-            return "Damage";
-        case HEALER:
-            return "Healer";
+    switch (_type)
+    {
+    case TANKER:
+        return "Tanker";
+    case DAMAGE:
+        return "Damage";
+    case HEALER:
+        return "Healer";
     }
 
     return "Error";
@@ -340,7 +335,7 @@ int Monster::getId() const
 
 double Monster::getRating() const
 {
-    return (b_atk + b_maxHp/100 + b_speed*10) / 30;
+    return (_atk + _maxHp / 100 + _speed * 10) / 30;
 }
 
 double Monster::getXp() const

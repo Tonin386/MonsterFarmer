@@ -39,8 +39,6 @@ protected:
     double _xp;
     int _level;
 
-    static double calcTotalXpForLevel(int level);
-
 public:
     Monster();
     Monster(
@@ -68,8 +66,8 @@ public:
     virtual bool canPlay() const;
 
     /* MANAGE MONSTER FUNCTIONS */
-    virtual int levelUp(bool verbose = true);
-    virtual void addXp(double xp);
+    virtual int levelUp(double xp);
+    virtual void reset(bool levelReset = false);
 
     /* STUFF RELATED FUNCTIONS */
     virtual void equipArmor(Item *a);
