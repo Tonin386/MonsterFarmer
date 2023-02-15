@@ -151,32 +151,52 @@ void Monster::reset(bool levelReset)
 
 void Monster::equipArmor(Item *a)
 {
-    delete _armor;
     _armor = a;
 }
 
 void Monster::equipWeapon(Item *w)
 {
-    delete _weapon;
     _weapon = w;
 }
 
 void Monster::equipRing1(Item *r)
 {
-    delete _ring1;
     _ring1 = r;
 }
 
 void Monster::equipRing2(Item *r)
 {
-    delete _ring2;
     _ring2 = r;
 }
 
 void Monster::equipTalisman(Item *t)
 {
-    delete _talisman;
     _talisman = t;
+}
+
+Item* Monster::getArmor() const
+{
+    return _armor;
+}
+
+Item* Monster::getWeapon() const
+{
+    return _weapon;
+}
+
+Item* Monster::getRing1() const
+{
+    return _ring1;
+}
+
+Item* Monster::getRing2() const
+{
+    return _ring2;
+}
+
+Item* Monster::getTalisman() const
+{
+    return _talisman;
 }
 
 double Monster::getCritRate() const

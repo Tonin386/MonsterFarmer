@@ -36,6 +36,7 @@ public:
     virtual std::vector<Monster *> getHealersTemplates();
 
     virtual std::vector<Item *> getItemTemplates() const;
+    virtual std::vector<Item *> getItemTemplatesByRarity(int rarity);
 
     virtual std::vector<Monster *> getActiveMonsters() const;
     virtual std::vector<Item *> getActiveItems() const;
@@ -51,9 +52,13 @@ public:
     virtual int loadMonsterTemplates();
     virtual int loadActiveMonsters();
 
+    virtual int loadItemTemplates();
+    virtual int loadActiveItems();
+
     virtual void startFight(Team *m1, Team *m2);
 
     virtual std::vector<Monster *> summonMonsters(int count = 1);
+    virtual std::vector<Item *> obtainItems(int count = 1);
     virtual Team *generateTeam();
 
     ~Game();

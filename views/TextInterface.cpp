@@ -4,6 +4,7 @@
 #include "../game/entities/monsters/Team.hpp"
 #include "../game/entities/players/Player.hpp"
 #include "../game/scenarios/Fight.hpp"
+#include "../game/entities/items/Item.hpp"
 
 #include <iostream>
 #include <iomanip>
@@ -57,6 +58,22 @@ void TextInterface::log(Monster *m)
     cout << "+ Speed: " << m->getSpeed() << endl;
     cout << "+ Stamina: " << m->getStamina() << "/" << m->getMaxStamina() << endl;
     cout << "+ Level: " << m->getLevel() << endl;
+    cout << "--------------------------" << endl;
+}
+
+void TextInterface::log(Item *m)
+{
+    cout << fixed;
+    cout << setprecision(2);
+    cout << "Stats for " << m->getName() << "[" << m->getId() << "]" << endl;
+    cout << "+ Rarity: " << m->getVerboseRarity() << endl;
+    cout << "+ Type: " << m->getVerboseType() << endl;
+    cout << "+ Overall rating: " << m->getRating() << endl;
+    cout << "+ Critical rate: " << m->getCrit() << endl;
+    cout << "+ Dodge rate: " << m->getDodge() << endl;
+    cout << "+ Combo rate: " << m->getCombo() << endl;
+    cout << "+ Stun rate: " << m->getStun() << endl;
+    cout << "+ Defense rating: " << m->getDef() << endl;
     cout << "--------------------------" << endl;
 }
 

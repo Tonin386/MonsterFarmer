@@ -1,0 +1,12 @@
+[
+    {
+        "name": "Item name",
+        "type": "A",
+        "rarity": 1,
+        "crit_rate": 0.5,
+        "dodge_rate": 0.5,
+        "combo_rate": 0.5,
+        "stun_rate": 0.5,
+        "def_rating": 10000
+    }
+]

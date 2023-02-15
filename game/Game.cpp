@@ -81,6 +81,18 @@ vector<Item *> Game::getItemTemplates() const
     return _itemTemplates;
 }
 
+vector<Item*> Game::getItemTemplatesByRarity(int rarity)
+{
+    vector<Item *> items;
+    for (int i = 0; i < _itemTemplates.size(); i++)
+    {
+        if (_itemTemplates[i]->getRarity() == rarity)
+            items.push_back(_itemTemplates[i]);
+    }
+
+    return items;
+}
+
 vector<Monster *> Game::getActiveMonsters() const
 {
     return _activeMonsters;
@@ -111,6 +123,18 @@ void Game::addActiveMonster(Monster *m)
 void Game::addActiveItem(Item *i)
 {
     _activeItems.push_back(i);
+    if(i->getId() == -1)
+    {
+        int maxId = _activeItems.size();
+        for (int j = 0; j < _activeItems.size(); j++)
+        {
+            int itemId = _activeItems[j]->getId();
+            if (itemId > maxId)
+                maxId = itemId;
+        }
+
+        i->setId(maxId + 1);
+    }
 }
 
 void Game::setPlayer(Player *p)
@@ -125,25 +149,25 @@ int Game::loadMonsterTemplates()
     int monstersLoaded = 0;
     int monsterRange = 95;
 
+    string filePath = "data/base_monsters/monsters.json";
+    ifstream file(filePath);
+
+    json j = json::parse(file);
+
     for (int i = 0; i < monsterRange; i++)
     {
-        string filePath = "data/base_monsters/monster_" + to_string(i) + ".json";
-        ifstream file(filePath);
-
-        json j = json::parse(file);
-
-        string name = j["name"].get<string>();
-        int rarity = j["rarity"].get<int>();
-        int type = j["type"].get<int>();
-        double baseAtk = j["baseAttack"].get<double>();
-        double baseMaxHp = j["baseMaxHp"].get<double>();
-        double baseSpeed = j["baseSpeed"].get<double>();
-        double atkGrowth = j["attackGrowth"].get<double>();
-        double maxHpGrowth = j["maxHpGrowth"].get<double>();
-        double speedGrowth = j["speedGrowth"].get<double>();
-        double maxStamina = j["maxStamina"].get<double>();
-        double stamina = j["stamina"].get<double>();
-        double xp = j["xp"].get<double>();
+        string name = j[i]["name"].get<string>();
+        int rarity = j[i]["rarity"].get<int>();
+        int type = j[i]["type"].get<int>();
+        double baseAtk = j[i]["baseAttack"].get<double>();
+        double baseMaxHp = j[i]["baseMaxHp"].get<double>();
+        double baseSpeed = j[i]["baseSpeed"].get<double>();
+        double atkGrowth = j[i]["attackGrowth"].get<double>();
+        double maxHpGrowth = j[i]["maxHpGrowth"].get<double>();
+        double speedGrowth = j[i]["speedGrowth"].get<double>();
+        double maxStamina = j[i]["maxStamina"].get<double>();
+        double stamina = j[i]["stamina"].get<double>();
+        double xp = j[i]["xp"].get<double>();
 
         Monster *m = new Monster(name, rarity, type, baseAtk, baseMaxHp, baseSpeed, atkGrowth, maxHpGrowth, speedGrowth, maxStamina, stamina, xp);
         addMonsterTemplate(m);
@@ -191,6 +215,72 @@ int Game::loadActiveMonsters()
     return monstersLoaded;
 }
 
+int Game::loadItemTemplates()
+{
+    using json = nlohmann::json;
+    int itemsLoaded = 0;
+    int itemRange = 100;
+
+    string filePath = "data/base_items/items.json";
+    ifstream file(filePath);
+
+    json j = json::parse(file);
+    for(int i = 0; i < itemRange; i++)
+    {
+        string name = j[i]["name"].get<string>();
+        char type = j[i]["type"].get<string>()[0];
+        int rarity = j[i]["rarity"].get<int>();
+        double crit_rate = j[i]["crit_rate"].get<double>();
+        double dodge_rate = j[i]["dodge_rate"].get<double>();
+        double combo_rate = j[i]["combo_rate"].get<double>();
+        double stun_rate = j[i]["stun_rate"].get<double>();
+        int def_rating = j[i]["def_rating"].get<int>();
+
+        Item *item = new Item(crit_rate, dodge_rate, combo_rate, stun_rate, def_rating, name, type, rarity);
+        addItemTemplate(item);
+        itemsLoaded++;
+    }
+
+    return itemsLoaded;
+}
+
+int Game::loadActiveItems()
+{
+    using json = nlohmann::json;
+    int itemsLoaded = 0;
+
+    string filePath = "save/items.json";
+    ifstream file(filePath);
+    
+    json j = json::parse(file);
+
+    string playerFilePath = "save/player.json";
+    ifstream playerFile(playerFilePath);
+
+    json jPlayer = json::parse(playerFile);
+    int itemsCount = jPlayer["items"].get<int>();
+
+    for(int i = 0; i < itemsCount; i++)
+    {
+        string name = j[i]["name"].get<string>();
+        char type = j[i]["type"].get<char>();
+        int rarity = j[i]["rarity"].get<int>();
+        double crit_rate = j[i]["crit_rate"].get<double>();
+        double dodge_rate = j[i]["dodge_rate"].get<double>();
+        double combo_rate = j[i]["combo_rate"].get<double>();
+        double stun_rate = j[i]["stun_rate"].get<double>();
+        int def_rating = j[i]["def_rating"].get<int>();
+        int id = j[i]["id"].get<int>();
+
+        Item *item = new Item(crit_rate, dodge_rate, combo_rate, stun_rate, def_rating, name, type, rarity);
+        item->setId(id);
+        addActiveItem(item);
+        itemsLoaded++;
+    }
+
+    return itemsLoaded;
+}
+
 void Game::startFight(Team *attackers, Team *defenders)
 {
     Fight *f = new Fight(attackers, defenders);
@@ -209,6 +299,7 @@ void Game::startFight(Team *attackers, Team *defenders)
     if (!f->getAttackers()->hasLost())
     {
         _player->summonMonsters(1);
+        _player->obtainItems(2);
         coeff = 1.25;
     }
 
@@ -217,7 +308,6 @@ void Game::startFight(Team *attackers, Team *defenders)
     (*(f->getAttackers()))[1]->levelUp(xp);
     (*(f->getAttackers()))[2]->levelUp(xp);
     (*(f->getAttackers()))[3]->levelUp(xp);
-
 
     f->getAttackers()->prepareForNextFight();
     _player->generateTeams();
@@ -268,6 +358,54 @@ vector<Monster *> Game::summonMonsters(int count)
     }
 
     return monsters;
+}
+
+vector<Item*> Game::obtainItems(int count)
+{
+    vector<Item *> legends = getItemTemplatesByRarity(5);
+    vector<Item *> epics = getItemTemplatesByRarity(4);
+    vector<Item *> rares = getItemTemplatesByRarity(3);
+    vector<Item *> uncommons = getItemTemplatesByRarity(2);
+    vector<Item *> commons = getItemTemplatesByRarity(1);
+
+    vector<Item *> items;
+
+    for (int i = 0; i < count; i++)
+    {
+        Item *it;
+        int tier = _farm->obtainItem();
+        if (tier < 10)
+        {
+            TextInterface::log("***** Legendary Item summoned! *****");
+            it = new Item(legends[rand() % legends.size()]);
+        }
+        else if (tier > 10 && tier <= 60)
+        {
+            TextInterface::log("**** Epic Item summoned! ****");
+            it = new Item(epics[rand() % epics.size()]);
+        }
+        else if (tier > 60 && tier <= 170)
+        {
+            TextInterface::log("*** Rare Item summoned! ***");
+            it = new Item(rares[rand() % rares.size()]);
+        }
+        else if (tier > 170 && tier <= 400)
+        {
+            TextInterface::log("** Uncommon Item summoned! **");
+            it = new Item(uncommons[rand() % uncommons.size()]);
+        }
+        else
+        {
+            TextInterface::log("* Common Item summoned! *");
+            it = new Item(commons[rand() % commons.size()]);
+        }
+
+        items.push_back(it);
+        TextInterface::log(it);
+    }
+
+    return items;
+    
 }
 
 Team *Game::generateTeam()

@@ -15,10 +15,12 @@ protected:
     char _type;
     double _rating;
     int _rarity;
+    int _id;
 
 public:
     Item();
     Item(double crit, double dodge, double combo, double stun, double def, std::string name, char type, int rarity);
+    Item(Item *i);
 
     virtual double getCrit() const;
     virtual double getDodge() const;
@@ -27,8 +29,13 @@ public:
     virtual double getDef() const;
     virtual std::string getName() const;
     virtual char getType() const;
+    virtual std::string getVerboseType() const;
     virtual double getRating() const;
-    virtual std::string getRarity() const;
+    virtual int getRarity() const;
+    virtual std::string getVerboseRarity() const;
+    virtual int getId() const;
+
+    virtual void setId(int id);
 
     static const char ARMOR_TYPE = 'A';
     static const char WEAPON_TYPE = 'W';

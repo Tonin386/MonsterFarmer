@@ -11,6 +11,7 @@ public:
     Farm();
 
     virtual int summonMonster();
+    virtual int obtainItem();
 
     ~Farm();
 };

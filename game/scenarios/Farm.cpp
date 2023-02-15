@@ -9,6 +9,11 @@ int Farm::summonMonster()
     return tier;
 }
 
+int Farm::obtainItem()
+{
+    return rand() % 1000;
+}
+
 Farm::~Farm()
 {
 }

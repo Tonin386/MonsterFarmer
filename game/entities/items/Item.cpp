@@ -1,5 +1,7 @@
 #include "Item.hpp"
 
+#include <iostream>
+
 using namespace std;
 
 Item::Item()
@@ -15,12 +17,28 @@ Item::Item()
 
     _rating = ((_crit + _dodge + _combo + _stun) * 10 + _def / 100) / 20;
     _rarity = 1;
+    _id = -1;
 }
 
 Item::Item(double crit, double dodge, double combo, double stun, double def, string name, char type, int rarity)
     : _crit(crit), _dodge(dodge), _combo(combo), _stun(stun), _def(def), _name(name), _type(type), _rarity(rarity)
 {
     // Well it's done actually...
+}
+
+Item::Item(Item *i)
+{
+    _crit = i->getCrit();
+    _dodge = i->getDodge();
+    _combo = i->getCombo();
+    _stun = i->getStun();
+    _def = i->getDef();
+
+    _name = i->getName();
+    _type = i->getType();
+    _rating = i->getRating();
+    _rarity = i->getRarity();
+    _id = -1;
 }
 
 double Item::getCrit() const
@@ -58,12 +76,34 @@ char Item::getType() const
     return _type;
 }
 
+string Item::getVerboseType() const
+{
+    switch (_type)
+    {
+    case ARMOR_TYPE:
+        return "Armor";
+    case WEAPON_TYPE:
+        return "Weapon";
+    case RING_TYPE:
+        return "Ring";
+    case TALISMAN_TYPE:
+        return "Talisman";
+    }
+
+    return "Error";
+}
+
 double Item::getRating() const
 {
     return _rating;
 }
 
-string Item::getRarity() const
+int Item::getRarity() const
+{
+    return _rarity;
+}
+
+string Item::getVerboseRarity() const
 {
     switch (_rarity)
     {
@@ -85,6 +125,16 @@ string Item::getRarity() const
     }
 
     return "Error";
+}
+
+int Item::getId() const
+{
+    return _id;
+}
+
+void Item::setId(int id)
+{
+    _id = id;
 }
 
 Item::~Item()

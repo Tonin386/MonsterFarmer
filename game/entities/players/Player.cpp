@@ -3,6 +3,7 @@
 #include "../../Game.hpp"
 #include "../../entities/monsters/Monster.hpp"
 #include "../../entities/monsters/Team.hpp"
+#include "../items/Item.hpp"
 
 #include "../../../libraries/json.hpp"
 
@@ -43,6 +44,12 @@ void Player::addMonster(Monster *m)
 {
     _monsters.push_back(m);
     _game->addActiveMonster(m);
+}
+
+void Player::addItem(Item *i)
+{
+    _game->addActiveItem(i);
+    _items.push_back(i);
 }
 
 int Player::generateTeams()
@@ -121,7 +128,8 @@ void Player::saveState()
     json jPlayer =
         {
             {"name", _name},
-            {"monsters", _monsters.size()}};
+            {"monsters", _monsters.size()},
+            {"items", _items.size()}};
 
     playerFile << jPlayer.dump(4);
     playerFile.close();
@@ -144,12 +152,36 @@ void Player::saveState()
         jMonster["rarity"] = m->getRarity();
         jMonster["type"] = m->getType();
         jMonster["xp"] = m->getXp();
+        jMonster["armor"] = m->getArmor()->getId();
+        jMonster["weapon"] = m->getWeapon()->getId();
+        jMonster["ring1"] = m->getRing1()->getId();
+        jMonster["ring2"] = m->getRing2()->getId();
+        jMonster["talisman"] = m->getTalisman()->getId();
 
         jMonsters[i] = jMonster;
     }
 
     monstersFile << jMonsters.dump(4);
     monstersFile.close();
+
+    ofstream itemsFile("save/items.json");
+    json jItems;
+    for (int i = 0; i < _items.size(); i++)
+    {
+        Item* it = _items[i];
+        jItems[i]["name"] = it->getName();
+        jItems[i]["type"] = it->getType();
+        jItems[i]["rarity"] = it->getRarity();
+        jItems[i]["crit_rate"] = it->getCrit();
+        jItems[i]["dodge_rate"] = it->getDodge();
+        jItems[i]["combo_rate"] = it->getCombo();
+        jItems[i]["stun_rate"] = it->getStun();
+        jItems[i]["def_rating"] = it->getDef();
+        jItems[i]["id"] = it->getId();
+    }
+
+    itemsFile << jItems.dump(4);
+    itemsFile.close();
 }
 
 void Player::loadState()
@@ -159,10 +191,19 @@ void Player::loadState()
 
 void Player::summonMonsters(int count)
 {
-    vector<Monster*> monsters = _game->summonMonsters(count);
-    for(int i = 0; i < count; i++)
+    vector<Monster *> monsters = _game->summonMonsters(count);
+    for (int i = 0; i < count; i++)
     {
         addMonster(monsters[i]);
+    }
+}
+
+void Player::obtainItems(int count)
+{
+    vector<Item *> items = _game->obtainItems(count);
+    for (int i = 0; i < count; i++)
+    {
+        addItem(items[i]);
     }
 }
 

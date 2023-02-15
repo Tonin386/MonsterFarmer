@@ -35,4 +35,5 @@
 .vscode
 test.cpp
 generateMonsters.py
+generateItems.py
 save

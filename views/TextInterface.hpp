@@ -7,6 +7,7 @@ class Monster;
 class Fight;
 class Player;
 class Team;
+class Item;
 
 class TextInterface
 {
@@ -17,6 +18,7 @@ public:
 
     static void log(std::string s);
     static void log(Monster *m);
+    static void log(Item *i);
     static void log(Fight *f);
     static void log(Player *p);
     static void log(Team *t);

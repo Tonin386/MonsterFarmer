@@ -17,11 +17,18 @@ int main(int argc, char const *argv[])
 
     Game *game = new Game();
     int loadedMonsterTemplates = game->loadMonsterTemplates();
+    cout << "Here 1 " << endl;
+    int loadedItemTemplates = game->loadItemTemplates();
+    cout << "Here 2 " << endl;
 
     Player *p1 = new Player("Fiddle");
 
     game->setPlayer(p1);
+    cout << "Here 3 " << endl;
+    game->loadActiveItems();
+    cout << "Here 4" << endl;
     game->loadActiveMonsters();
+    cout << "here 5" << endl;
     if(p1->getMonsters().size() < 10)
         p1->summonMonsters(10);
         

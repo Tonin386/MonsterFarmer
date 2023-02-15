@@ -76,6 +76,12 @@ public:
     virtual void equipRing2(Item *r);
     virtual void equipTalisman(Item *t);
 
+    virtual Item* getArmor() const;
+    virtual Item* getWeapon() const;
+    virtual Item* getRing1() const;
+    virtual Item* getRing2() const;
+    virtual Item* getTalisman() const;
+
     /* DAMAGE DONE MODIFIERS */
     virtual double getCritRate() const;
     virtual double getDodgeRate() const;
