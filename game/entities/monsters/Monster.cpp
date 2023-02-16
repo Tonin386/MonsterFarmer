@@ -25,11 +25,11 @@ Monster::Monster()
     _rarity = 1;
     _type = 0;
 
-    _armor = nullptr;
-    _weapon = nullptr;
-    _ring1 = nullptr;
-    _ring2 = nullptr;
-    _talisman = nullptr;
+    _armor = new Item();
+    _weapon = new Item();
+    _ring1 = new Item();
+    _ring2 = new Item();
+    _talisman = new Item();
 
     _team = 0;
     _id = -1;
@@ -49,11 +49,11 @@ Monster::Monster(string name, int rarity, int type, double baseAtk, double baseM
     _level = 0;
     levelUp(xp);
 
-    _armor = nullptr;
-    _weapon = nullptr;
-    _ring1 = nullptr;
-    _ring2 = nullptr;
-    _talisman = nullptr;
+    _armor = new Item();
+    _weapon = new Item();
+    _ring1 = new Item();
+    _ring2 = new Item();
+    _talisman = new Item();
 
     _team = 0;
     _id = -1;
@@ -177,11 +177,11 @@ void Monster::equipTalisman(Item *t)
 
 void Monster::desequipArmor()
 {
-    _armor = nullptr;
-    _weapon = nullptr;
-    _ring1 = nullptr;
-    _ring2 = nullptr;
-    _talisman = nullptr;
+    _armor = new Item();
+    _weapon = new Item();
+    _ring1 = new Item();
+    _ring2 = new Item();
+    _talisman = new Item();
 }
 
 Item* Monster::getArmor() const

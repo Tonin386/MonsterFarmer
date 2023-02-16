@@ -10,6 +10,7 @@
 #include "../libraries/json.hpp"
 
 #include <fstream>
+#include <iostream>
 
 using namespace std;
 
@@ -81,7 +82,7 @@ vector<Item *> Game::getItemTemplates() const
     return _itemTemplates;
 }
 
-vector<Item*> Game::getItemTemplatesByRarity(int rarity)
+vector<Item *> Game::getItemTemplatesByRarity(int rarity)
 {
     vector<Item *> items;
     for (int i = 0; i < _itemTemplates.size(); i++)
@@ -123,7 +124,7 @@ void Game::addActiveMonster(Monster *m)
 void Game::addActiveItem(Item *i)
 {
     _activeItems.push_back(i);
-    if(i->getId() == -1)
+    if (i->getId() == -1)
     {
         int maxId = _activeItems.size();
         for (int j = 0; j < _activeItems.size(); j++)
@@ -225,10 +226,10 @@ int Game::loadItemTemplates()
     ifstream file(filePath);
 
     json j = json::parse(file);
-    for(int i = 0; i < itemRange; i++)
+    for (int i = 0; i < itemRange; i++)
     {
         string name = j[i]["name"].get<string>();
-        char type = j[i]["type"].get<string>()[0];
+        char type = j[i]["type"].get<string>()[0] - 32;
         int rarity = j[i]["rarity"].get<int>();
         double crit_rate = j[i]["crit_rate"].get<double>();
         double dodge_rate = j[i]["dodge_rate"].get<double>();
@@ -251,7 +252,7 @@ int Game::loadActiveItems()
 
     string filePath = "save/items.json";
     ifstream file(filePath);
-    
+
     json j = json::parse(file);
 
     string playerFilePath = "save/player.json";
@@ -260,10 +261,10 @@ int Game::loadActiveItems()
     json jPlayer = json::parse(playerFile);
     int itemsCount = jPlayer["items"].get<int>();
 
-    for(int i = 0; i < itemsCount; i++)
+    for (int i = 0; i < itemsCount; i++)
     {
         string name = j[i]["name"].get<string>();
-        char type = j[i]["type"].get<char>();
+        char type = j[i]["type"].get<int>();
         int rarity = j[i]["rarity"].get<int>();
         double crit_rate = j[i]["crit_rate"].get<double>();
         double dodge_rate = j[i]["dodge_rate"].get<double>();
@@ -298,8 +299,9 @@ void Game::startFight(Team *attackers, Team *defenders)
 
     if (!f->getAttackers()->hasLost())
     {
-        _player->summonMonsters(1);
-        _player->obtainItems(2);
+        if (rand() % 100 > 75)
+            _player->summonMonsters(1);
+        _player->obtainItems(1 + rand() % 3);
         coeff = 1.25;
     }
 
@@ -360,7 +362,7 @@ vector<Monster *> Game::summonMonsters(int count)
     return monsters;
 }
 
-vector<Item*> Game::obtainItems(int count)
+vector<Item *> Game::obtainItems(int count)
 {
     vector<Item *> legends = getItemTemplatesByRarity(5);
     vector<Item *> epics = getItemTemplatesByRarity(4);
@@ -405,7 +407,6 @@ vector<Item*> Game::obtainItems(int count)
     }
 
     return items;
-    
 }
 
 Team *Game::generateTeam()
@@ -442,31 +443,31 @@ Team *Game::generateTeam()
 
 Game::~Game()
 {
-    for(int i = 0; i < _monsterTemplates.size(); i++)
+    for (int i = 0; i < _monsterTemplates.size(); i++)
     {
         delete _monsterTemplates[i];
     }
-    
-    for(int i = 0; i < _itemTemplates.size(); i++)
+
+    for (int i = 0; i < _itemTemplates.size(); i++)
     {
         delete _itemTemplates[i];
     }
-    
-    for(int i = 0; i < _activeMonsters.size(); i++)
+
+    for (int i = 0; i < _activeMonsters.size(); i++)
     {
         delete _activeMonsters[i];
     }
-    
-    for(int i = 0; i < _activeItems.size(); i++)
+
+    for (int i = 0; i < _activeItems.size(); i++)
     {
         delete _activeItems[i];
     }
-    
-    for(int i = 0; i < _fights.size(); i++)
+
+    for (int i = 0; i < _fights.size(); i++)
     {
         delete _fights[i];
     }
-    
+
     delete _player;
     delete _farm;
 }

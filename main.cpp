@@ -24,8 +24,8 @@ int main(int argc, char const *argv[])
     game->setPlayer(p1);
     game->loadActiveItems();
     game->loadActiveMonsters();
-    if(p1->getMonsters().size() < 10)
-        p1->summonMonsters(10);
+    if(p1->getMonsters().size() < 4)
+        p1->summonMonsters(15);
         
     p1->generateTeams();
     

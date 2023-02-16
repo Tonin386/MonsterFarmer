@@ -36,7 +36,7 @@ void TextInterface::log(Fight *f)
         cout << all[i]->getName() << " attacked " << attacksCount[id] << " times for a total of " << damageDealt[id] << " of damage done." << endl;
     }
 
-    if(f->hasEnded())
+    if (f->hasEnded())
     {
         if (attackers->hasLost())
             cout << "Attackers lost." << endl;
@@ -58,23 +58,35 @@ void TextInterface::log(Monster *m)
     cout << "+ Speed: " << m->getSpeed() << endl;
     cout << "+ Stamina: " << m->getStamina() << "/" << m->getMaxStamina() << endl;
     cout << "+ Level: " << m->getLevel() << endl;
+    log(m->getArmor());
+    log(m->getWeapon());
+    log(m->getRing1());
+    log(m->getRing2());
+    log(m->getTalisman());
     cout << "--------------------------" << endl;
 }
 
 void TextInterface::log(Item *m)
 {
-    cout << fixed;
-    cout << setprecision(2);
-    cout << "Stats for " << m->getName() << "[" << m->getId() << "]" << endl;
-    cout << "+ Rarity: " << m->getVerboseRarity() << endl;
-    cout << "+ Type: " << m->getVerboseType() << endl;
-    cout << "+ Overall rating: " << m->getRating() << endl;
-    cout << "+ Critical rate: " << m->getCrit() << endl;
-    cout << "+ Dodge rate: " << m->getDodge() << endl;
-    cout << "+ Combo rate: " << m->getCombo() << endl;
-    cout << "+ Stun rate: " << m->getStun() << endl;
-    cout << "+ Defense rating: " << m->getDef() << endl;
-    cout << "--------------------------" << endl;
+    if(m->getType() != '?')
+    {
+        cout << fixed;
+        cout << setprecision(2);
+        cout << "\tStats for " << m->getName() << "[" << m->getId() << "]" << endl;
+        cout << "\t+ Rarity: " << m->getVerboseRarity() << endl;
+        cout << "\t+ Type: " << m->getVerboseType() << endl;
+        cout << "\t+ Overall rating: " << m->getRating() << endl;
+        cout << "\t+ Critical rate: " << m->getCrit() << endl;
+        cout << "\t+ Dodge rate: " << m->getDodge() << endl;
+        cout << "\t+ Combo rate: " << m->getCombo() << endl;
+        cout << "\t+ Stun rate: " << m->getStun() << endl;
+        cout << "\t+ Defense rating: " << m->getDef() << endl;
+        cout << "\t*********************" << endl;
+    }
+    else
+    {
+        cout << "\tNo item" << endl;
+    }
 }
 
 void TextInterface::log(Player *p)

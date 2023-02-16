@@ -69,16 +69,16 @@ int Player::generateTeams()
     int nbHealers = 0;
     vector<Monster *> healers;
 
-    int nbArmors;
+    int nbArmors = 0;
     vector<Item *> armors;
 
-    int nbWeapons;
+    int nbWeapons = 0;
     vector<Item *> weapons;
 
-    int nbRings;
+    int nbRings = 0;
     vector<Item *> rings;
 
-    int nbTalismans;
+    int nbTalismans = 0;
     vector<Item *> talismans;
 
     for (int i = 0; i < _monsters.size(); i++)
@@ -167,173 +167,154 @@ int Player::generateTeams()
 
         /******** EQUIP ARMORS *******/
 
-        cout << "Equipping armors" << endl;
-
-        if (tankers[0]->getArmor()->getId() != -1 && nbArmors > 0)
+        if (tankers[0]->getArmor()->getId() == -1 && nbArmors > 0)
         {
+            cout << "Equip armor " << armors[0]->getName() << endl;
             tankers[0]->equipArmor(armors[0]);
             armors.erase(armors.begin());
             nbArmors--;
         }
 
-        if (tankers[1]->getArmor()->getId() != -1 && nbArmors > 0)
+        if (tankers[1]->getArmor()->getId() == -1 && nbArmors > 0)
         {
             tankers[1]->equipArmor(armors[0]);
             armors.erase(armors.begin());
             nbArmors--;
         }
 
-        if (damages[0]->getArmor()->getId() != -1 && nbArmors > 0)
+        if (damages[0]->getArmor()->getId() == -1 && nbArmors > 0)
         {
             damages[0]->equipArmor(armors[0]);
             armors.erase(armors.begin());
             nbArmors--;
         }
 
-        if (healers[0]->getArmor()->getId() != -1 && nbArmors > 0)
+        if (healers[0]->getArmor()->getId() == -1 && nbArmors > 0)
         {
             healers[0]->equipArmor(armors[0]);
             armors.erase(armors.begin());
             nbArmors--;
         }
 
-        cout << "Armors equipped" << endl;
-
         /******** EQUIP WEAPONS *******/
 
-        cout << "Equipping weapons" << endl;
-
-        if (tankers[0]->getWeapon()->getId() != -1 && nbWeapons > 0)
+        if (tankers[0]->getWeapon()->getId() == -1 && nbWeapons > 0)
         {
             tankers[0]->equipWeapon(weapons[0]);
             weapons.erase(weapons.begin());
             nbWeapons--;
         }
 
-        if (tankers[1]->getWeapon()->getId() != -1 && nbWeapons > 0)
+        if (tankers[1]->getWeapon()->getId() == -1 && nbWeapons > 0)
         {
             tankers[1]->equipWeapon(weapons[0]);
             weapons.erase(weapons.begin());
             nbWeapons--;
         }
 
-        if (damages[0]->getWeapon()->getId() != -1 && nbWeapons > 0)
+        if (damages[0]->getWeapon()->getId() == -1 && nbWeapons > 0)
         {
             damages[0]->equipWeapon(weapons[0]);
             weapons.erase(weapons.begin());
             nbWeapons--;
         }
 
-        if (healers[0]->getWeapon()->getId() != -1 && nbWeapons > 0)
+        if (healers[0]->getWeapon()->getId() == -1 && nbWeapons > 0)
         {
             healers[0]->equipWeapon(weapons[0]);
             weapons.erase(weapons.begin());
             nbWeapons--;
         }
 
-        cout << "Weapons equipped" << endl;
-
         /******** EQUIP RING 1 *******/
 
-        cout << "Equipping rings 1" << endl;
-
-        if (tankers[0]->getRing1()->getId() != -1 && nbRings > 0)
+        if (tankers[0]->getRing1()->getId() == -1 && nbRings > 0)
         {
             tankers[0]->equipRing1(rings[0]);
             rings.erase(rings.begin());
             nbRings--;
         }
 
-        if (tankers[1]->getRing1()->getId() != -1 && nbRings > 0)
+        if (tankers[1]->getRing1()->getId() == -1 && nbRings > 0)
         {
             tankers[1]->equipRing1(rings[0]);
             rings.erase(rings.begin());
             nbRings--;
         }
 
-        if (damages[0]->getRing1()->getId() != -1 && nbRings > 0)
+        if (damages[0]->getRing1()->getId() == -1 && nbRings > 0)
         {
             damages[0]->equipRing1(rings[0]);
             rings.erase(rings.begin());
             nbRings--;
         }
 
-        if (healers[0]->getRing1()->getId() != -1 && nbRings > 0)
+        if (healers[0]->getRing1()->getId() == -1 && nbRings > 0)
         {
             healers[0]->equipRing1(rings[0]);
             rings.erase(rings.begin());
             nbRings--;
         }
 
-        cout << "Rings 1 equipped" << endl;
-
         /******** EQUIP RING 2 ******/
 
-        cout << "Equipping rings 2" << endl;
-
-        if (tankers[0]->getRing2()->getId() != -1 && nbRings > 0)
+        if (tankers[0]->getRing2()->getId() == -1 && nbRings > 0)
         {
             tankers[0]->equipRing2(rings[0]);
             rings.erase(rings.begin());
             nbRings--;
         }
 
-        if (tankers[1]->getRing2()->getId() != -1 && nbRings > 0)
+        if (tankers[1]->getRing2()->getId() == -1 && nbRings > 0)
         {
             tankers[1]->equipRing2(rings[0]);
             rings.erase(rings.begin());
             nbRings--;
         }
 
-        if (damages[0]->getRing2()->getId() != -1 && nbRings > 0)
+        if (damages[0]->getRing2()->getId() == -1 && nbRings > 0)
         {
             damages[0]->equipRing2(rings[0]);
             rings.erase(rings.begin());
             nbRings--;
         }
 
-        if (healers[0]->getRing2()->getId() != -1 && nbRings > 0)
+        if (healers[0]->getRing2()->getId() == -1 && nbRings > 0)
         {
             healers[0]->equipRing2(rings[0]);
             rings.erase(rings.begin());
             nbRings--;
         }
 
-        cout << "Rings 2 equipped" << endl;
-
         /******** EQUIP TALISMANS *******/
 
-        cout << "Equipping talismans" << endl;
-
-        if (tankers[0]->getTalisman()->getId() != -1 && nbTalismans > 0)
+        if (tankers[0]->getTalisman()->getId() == -1 && nbTalismans > 0)
         {
             tankers[0]->equipTalisman(talismans[0]);
             talismans.erase(talismans.begin());
             nbTalismans--;
         }
 
-        if (tankers[1]->getTalisman()->getId() != -1 && nbTalismans > 0)
+        if (tankers[1]->getTalisman()->getId() == -1 && nbTalismans > 0)
         {
             tankers[1]->equipTalisman(talismans[0]);
             talismans.erase(talismans.begin());
             nbTalismans--;
         }
 
-        if (damages[0]->getTalisman()->getId() != -1 && nbTalismans > 0)
+        if (damages[0]->getTalisman()->getId() == -1 && nbTalismans > 0)
         {
             damages[0]->equipTalisman(talismans[0]);
             talismans.erase(talismans.begin());
             nbTalismans--;
         }
 
-        if (healers[0]->getTalisman()->getId() != -1 && nbTalismans > 0)
+        if (healers[0]->getTalisman()->getId() == -1 && nbTalismans > 0)
         {
             healers[0]->equipTalisman(talismans[0]);
             talismans.erase(talismans.begin());
             nbTalismans--;
         }
-
-        cout << "Talismans equipped" << endl;
 
         tankers.erase(tankers.begin());
         tankers.erase(tankers.begin());
