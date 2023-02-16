@@ -75,6 +75,7 @@ public:
     virtual void equipRing1(Item *r);
     virtual void equipRing2(Item *r);
     virtual void equipTalisman(Item *t);
+    virtual void desequipArmor();
 
     virtual Item* getArmor() const;
     virtual Item* getWeapon() const;

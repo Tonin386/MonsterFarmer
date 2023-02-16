@@ -8,6 +8,7 @@
 #include "../../../libraries/json.hpp"
 
 #include <fstream>
+#include <iostream>
 
 using namespace std;
 
@@ -68,6 +69,18 @@ int Player::generateTeams()
     int nbHealers = 0;
     vector<Monster *> healers;
 
+    int nbArmors;
+    vector<Item *> armors;
+
+    int nbWeapons;
+    vector<Item *> weapons;
+
+    int nbRings;
+    vector<Item *> rings;
+
+    int nbTalismans;
+    vector<Item *> talismans;
+
     for (int i = 0; i < _monsters.size(); i++)
     {
         Monster *m = _monsters[i];
@@ -89,12 +102,59 @@ int Player::generateTeams()
         }
     }
 
-    sort(tankers.begin(), tankers.end(), [](const Monster *a, const Monster *b)
-         { return a->getRating() > b->getRating(); });
-    sort(damages.begin(), damages.end(), [](const Monster *a, const Monster *b)
-         { return a->getRating() > b->getRating(); });
-    sort(healers.begin(), healers.end(), [](const Monster *a, const Monster *b)
-         { return a->getRating() > b->getRating(); });
+    for (int i = 0; i < _items.size(); i++)
+    {
+        Item *it = _items[i];
+        switch (it->getType())
+        {
+        default:
+            break;
+        case Item::ARMOR_TYPE:
+            armors.push_back(it);
+            nbArmors++;
+            break;
+        case Item::WEAPON_TYPE:
+            weapons.push_back(it);
+            nbWeapons++;
+            break;
+        case Item::RING_TYPE:
+            rings.push_back(it);
+            nbRings++;
+            break;
+        case Item::TALISMAN_TYPE:
+            talismans.push_back(it);
+            nbTalismans++;
+            break;
+        }
+    }
+
+    if (nbTankers > 0)
+        sort(tankers.begin(), tankers.end(), [](const Monster *a, const Monster *b)
+             { return a->getRating() > b->getRating(); });
+
+    if (nbDamages > 0)
+        sort(damages.begin(), damages.end(), [](const Monster *a, const Monster *b)
+             { return a->getRating() > b->getRating(); });
+
+    if (nbHealers > 0)
+        sort(healers.begin(), healers.end(), [](const Monster *a, const Monster *b)
+             { return a->getRating() > b->getRating(); });
+
+    if (nbArmors > 0)
+        sort(armors.begin(), armors.end(), [](const Item *a, const Item *b)
+             { return a->getRating() > b->getRating(); });
+
+    if (nbWeapons > 0)
+        sort(weapons.begin(), weapons.end(), [](const Item *a, const Item *b)
+             { return a->getRating() > b->getRating(); });
+
+    if (nbRings > 0)
+        sort(rings.begin(), rings.end(), [](const Item *a, const Item *b)
+             { return a->getRating() > b->getRating(); });
+
+    if (nbTalismans > 0)
+        sort(talismans.begin(), talismans.end(), [](const Item *a, const Item *b)
+             { return a->getRating() > b->getRating(); });
 
     int nbTeams = 0;
     while (nbTankers > 2 && nbDamages > 1 && nbHealers > 1)
@@ -104,6 +164,176 @@ int Player::generateTeams()
         t->addMonster(tankers[1]);
         t->addMonster(damages[0]);
         t->addMonster(healers[0]);
+
+        /******** EQUIP ARMORS *******/
+
+        cout << "Equipping armors" << endl;
+
+        if (tankers[0]->getArmor()->getId() != -1 && nbArmors > 0)
+        {
+            tankers[0]->equipArmor(armors[0]);
+            armors.erase(armors.begin());
+            nbArmors--;
+        }
+
+        if (tankers[1]->getArmor()->getId() != -1 && nbArmors > 0)
+        {
+            tankers[1]->equipArmor(armors[0]);
+            armors.erase(armors.begin());
+            nbArmors--;
+        }
+
+        if (damages[0]->getArmor()->getId() != -1 && nbArmors > 0)
+        {
+            damages[0]->equipArmor(armors[0]);
+            armors.erase(armors.begin());
+            nbArmors--;
+        }
+
+        if (healers[0]->getArmor()->getId() != -1 && nbArmors > 0)
+        {
+            healers[0]->equipArmor(armors[0]);
+            armors.erase(armors.begin());
+            nbArmors--;
+        }
+
+        cout << "Armors equipped" << endl;
+
+        /******** EQUIP WEAPONS *******/
+
+        cout << "Equipping weapons" << endl;
+
+        if (tankers[0]->getWeapon()->getId() != -1 && nbWeapons > 0)
+        {
+            tankers[0]->equipWeapon(weapons[0]);
+            weapons.erase(weapons.begin());
+            nbWeapons--;
+        }
+
+        if (tankers[1]->getWeapon()->getId() != -1 && nbWeapons > 0)
+        {
+            tankers[1]->equipWeapon(weapons[0]);
+            weapons.erase(weapons.begin());
+            nbWeapons--;
+        }
+
+        if (damages[0]->getWeapon()->getId() != -1 && nbWeapons > 0)
+        {
+            damages[0]->equipWeapon(weapons[0]);
+            weapons.erase(weapons.begin());
+            nbWeapons--;
+        }
+
+        if (healers[0]->getWeapon()->getId() != -1 && nbWeapons > 0)
+        {
+            healers[0]->equipWeapon(weapons[0]);
+            weapons.erase(weapons.begin());
+            nbWeapons--;
+        }
+
+        cout << "Weapons equipped" << endl;
+
+        /******** EQUIP RING 1 *******/
+
+        cout << "Equipping rings 1" << endl;
+
+        if (tankers[0]->getRing1()->getId() != -1 && nbRings > 0)
+        {
+            tankers[0]->equipRing1(rings[0]);
+            rings.erase(rings.begin());
+            nbRings--;
+        }
+
+        if (tankers[1]->getRing1()->getId() != -1 && nbRings > 0)
+        {
+            tankers[1]->equipRing1(rings[0]);
+            rings.erase(rings.begin());
+            nbRings--;
+        }
+
+        if (damages[0]->getRing1()->getId() != -1 && nbRings > 0)
+        {
+            damages[0]->equipRing1(rings[0]);
+            rings.erase(rings.begin());
+            nbRings--;
+        }
+
+        if (healers[0]->getRing1()->getId() != -1 && nbRings > 0)
+        {
+            healers[0]->equipRing1(rings[0]);
+            rings.erase(rings.begin());
+            nbRings--;
+        }
+
+        cout << "Rings 1 equipped" << endl;
+
+        /******** EQUIP RING 2 ******/
+
+        cout << "Equipping rings 2" << endl;
+
+        if (tankers[0]->getRing2()->getId() != -1 && nbRings > 0)
+        {
+            tankers[0]->equipRing2(rings[0]);
+            rings.erase(rings.begin());
+            nbRings--;
+        }
+
+        if (tankers[1]->getRing2()->getId() != -1 && nbRings > 0)
+        {
+            tankers[1]->equipRing2(rings[0]);
+            rings.erase(rings.begin());
+            nbRings--;
+        }
+
+        if (damages[0]->getRing2()->getId() != -1 && nbRings > 0)
+        {
+            damages[0]->equipRing2(rings[0]);
+            rings.erase(rings.begin());
+            nbRings--;
+        }
+
+        if (healers[0]->getRing2()->getId() != -1 && nbRings > 0)
+        {
+            healers[0]->equipRing2(rings[0]);
+            rings.erase(rings.begin());
+            nbRings--;
+        }
+
+        cout << "Rings 2 equipped" << endl;
+
+        /******** EQUIP TALISMANS *******/
+
+        cout << "Equipping talismans" << endl;
+
+        if (tankers[0]->getTalisman()->getId() != -1 && nbTalismans > 0)
+        {
+            tankers[0]->equipTalisman(talismans[0]);
+            talismans.erase(talismans.begin());
+            nbTalismans--;
+        }
+
+        if (tankers[1]->getTalisman()->getId() != -1 && nbTalismans > 0)
+        {
+            tankers[1]->equipTalisman(talismans[0]);
+            talismans.erase(talismans.begin());
+            nbTalismans--;
+        }
+
+        if (damages[0]->getTalisman()->getId() != -1 && nbTalismans > 0)
+        {
+            damages[0]->equipTalisman(talismans[0]);
+            talismans.erase(talismans.begin());
+            nbTalismans--;
+        }
+
+        if (healers[0]->getTalisman()->getId() != -1 && nbTalismans > 0)
+        {
+            healers[0]->equipTalisman(talismans[0]);
+            talismans.erase(talismans.begin());
+            nbTalismans--;
+        }
+
+        cout << "Talismans equipped" << endl;
 
         tankers.erase(tankers.begin());
         tankers.erase(tankers.begin());
@@ -152,11 +382,11 @@ void Player::saveState()
         jMonster["rarity"] = m->getRarity();
         jMonster["type"] = m->getType();
         jMonster["xp"] = m->getXp();
-        jMonster["armor"] = m->getArmor()->getId();
-        jMonster["weapon"] = m->getWeapon()->getId();
-        jMonster["ring1"] = m->getRing1()->getId();
-        jMonster["ring2"] = m->getRing2()->getId();
-        jMonster["talisman"] = m->getTalisman()->getId();
+        // jMonster["armor"] = m->getArmor()->getId();
+        // jMonster["weapon"] = m->getWeapon()->getId();
+        // jMonster["ring1"] = m->getRing1()->getId();
+        // jMonster["ring2"] = m->getRing2()->getId();
+        // jMonster["talisman"] = m->getTalisman()->getId();
 
         jMonsters[i] = jMonster;
     }
@@ -168,7 +398,7 @@ void Player::saveState()
     json jItems;
     for (int i = 0; i < _items.size(); i++)
     {
-        Item* it = _items[i];
+        Item *it = _items[i];
         jItems[i]["name"] = it->getName();
         jItems[i]["type"] = it->getType();
         jItems[i]["rarity"] = it->getRarity();
@@ -214,4 +444,8 @@ void Player::setGame(Game *g)
 
 Player::~Player()
 {
+    for (int i = 0; i < _teams.size(); i++)
+    {
+        delete _teams[i];
+    }
 }

@@ -442,4 +442,31 @@ Team *Game::generateTeam()
 
 Game::~Game()
 {
+    for(int i = 0; i < _monsterTemplates.size(); i++)
+    {
+        delete _monsterTemplates[i];
+    }
+    
+    for(int i = 0; i < _itemTemplates.size(); i++)
+    {
+        delete _itemTemplates[i];
+    }
+    
+    for(int i = 0; i < _activeMonsters.size(); i++)
+    {
+        delete _activeMonsters[i];
+    }
+    
+    for(int i = 0; i < _activeItems.size(); i++)
+    {
+        delete _activeItems[i];
+    }
+    
+    for(int i = 0; i < _fights.size(); i++)
+    {
+        delete _fights[i];
+    }
+    
+    delete _player;
+    delete _farm;
 }
