@@ -25,6 +25,7 @@ public:
     virtual std::vector<Monster *> getMonsters() const;
     virtual double getAverageLevel();
     virtual double getAverageRating();
+    virtual double getAverageItemsRating();
 
     virtual Monster *operator[](int i);
 

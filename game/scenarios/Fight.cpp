@@ -6,7 +6,6 @@
 
 #include <algorithm>
 
-
 using namespace std;
 
 Fight::Fight(Team *a, Team *d) : _attackers(a), _defenders(d)
@@ -39,7 +38,7 @@ bool Fight::playTurn()
     for (int i = 0; i < 8; i++)
     {
         int id = _all[i]->getId();
-        if (_all[i]->canPlay() && _all[i]->isAlive())
+        if (_all[i]->canPlay() && _all[i]->isAlive() && !_all[i]->isStunned())
         {
             for (int j = 0; j < 4; j++) // We find the target of the attack
             {
@@ -47,8 +46,16 @@ bool Fight::playTurn()
                 {
                     if ((*_defenders)[j]->isAlive())
                     {
-                        _attacksCount[id]++;
-                        _damageDealt[id] += _all[i]->attack((*_defenders)[j]);
+                        int combo = -1;
+                        while (combo < _all[i]->getComboRate() * 100)
+                        {
+                            combo = rand() % 10001;
+                            _attacksCount[id]++;
+                            _damageDealt[id] += _all[i]->attack((*_defenders)[j]);
+                            if (rand() % 10001 < _all[i]->getStunRate() * 100)
+                                (*_defenders)[j]->stun();
+                        }
+
                         break;
                     }
                 }
@@ -56,8 +63,16 @@ bool Fight::playTurn()
                 {
                     if ((*_attackers)[j]->isAlive())
                     {
-                        _attacksCount[id]++;
-                        _damageDealt[id] += _all[i]->attack((*_attackers)[j]);
+                        int combo = -1;
+                        while (combo < _all[i]->getComboRate() * 100)
+                        {
+                            combo = rand() % 10001;
+                            _attacksCount[id]++;
+                            _damageDealt[id] += _all[i]->attack((*_attackers)[j]);
+                            if (rand() % 10001 < _all[i]->getStunRate() * 100)
+                                (*_attackers)[j]->stun();
+                        }
+
                         break;
                     }
                 }
@@ -94,7 +109,7 @@ map<int, double> Fight::getDamageDealt() const
     return _damageDealt;
 }
 
-Team* Fight::getAttackers() const
+Team *Fight::getAttackers() const
 {
     return _attackers;
 }
@@ -104,7 +119,7 @@ double Fight::getAttackersRating()
     return ((*_attackers)[0]->getRating() + (*_attackers)[1]->getRating() + (*_attackers)[2]->getRating() + (*_attackers)[3]->getRating()) / 4;
 }
 
-Team* Fight::getDefenders() const
+Team *Fight::getDefenders() const
 {
     return _defenders;
 }
@@ -114,7 +129,7 @@ double Fight::getDefendersRating()
     return ((*_defenders)[0]->getRating() + (*_defenders)[1]->getRating() + (*_defenders)[2]->getRating() + (*_defenders)[3]->getRating()) / 4;
 }
 
-vector<Monster*> Fight::getMonsters() const
+vector<Monster *> Fight::getMonsters() const
 {
     return _all;
 }

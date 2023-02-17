@@ -11,11 +11,12 @@ Item::Item()
     _dodge = 0;
     _combo = 0;
     _stun = 0;
-    _def = 1000; // Max defense should be 100000. equivalent to 100% def.
+    _def = 0; // Max defense should be 100000. equivalent to 100% def.
     _name = "Unwearable item";
     _type = '?';
 
-    _rating = (_crit + _dodge + _combo + _stun) * 5;
+        _rating = (((_crit + _dodge + _combo + _stun) * 5) * (1 - (10000 / (10000 + 4*_def))));
+
     _rarity = 1;
     _id = -1;
 }
@@ -23,7 +24,7 @@ Item::Item()
 Item::Item(double crit, double dodge, double combo, double stun, double def, string name, char type, int rarity)
     : _crit(crit), _dodge(dodge), _combo(combo), _stun(stun), _def(def), _name(name), _type(type), _rarity(rarity)
 {
-    _rating = (_crit + _dodge + _combo + _stun) * 5;
+    _rating = (((_crit + _dodge + _combo + _stun) * 5) * (1 - (10000 / (10000 + 4*_def))));
 }
 
 Item::Item(Item *i)

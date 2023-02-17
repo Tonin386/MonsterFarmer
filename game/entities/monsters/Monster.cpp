@@ -36,6 +36,7 @@ Monster::Monster()
 
     _level = 0;
     _xp = 0;
+    _stunned = false;
 }
 
 Monster::Monster(string name, int rarity, int type, double baseAtk, double baseMaxHp, double baseSpeed, double atkGrowth, double maxHpGrowth, double speedGrowth, double maxStamina, double stamina, double xp)
@@ -57,6 +58,7 @@ Monster::Monster(string name, int rarity, int type, double baseAtk, double baseM
 
     _team = 0;
     _id = -1;
+    _stunned = false;
 }
 
 Monster::Monster(Monster *m)
@@ -91,22 +93,30 @@ Monster::Monster(Monster *m)
     _xp = m->_xp;
     _level = m->_level;
     _id = -1;
+    _stunned = false;
 }
 
 double Monster::attack(Monster *target, double bonusStam)
 {
     _stamina -= _maxStamina;
     _stamina += bonusStam;
+
+    if (rand() % 10001 < getCritRate() * 100)
+        return target->receiveDamage(_atk * 2);
+
     return target->receiveDamage(_atk);
 }
 
 void Monster::prepare(double modifier)
 {
     _stamina += _speed * modifier;
+    _stunned = false;
 }
 
 double Monster::receiveDamage(double damage)
 {
+    if (rand() % 10001 < getDodgeRate() * 100)
+        return 0;
     double dealt = damage * (1 - getDefenseRate());
     _hp -= dealt;
     if (_hp <= 0)
@@ -114,9 +124,19 @@ double Monster::receiveDamage(double damage)
     return dealt;
 }
 
+void Monster::stun()
+{
+    _stunned = true;
+}
+
 bool Monster::isAlive() const
 {
     return _hp >= 0;
+}
+
+bool Monster::isStunned() const
+{
+    return _stunned;
 }
 
 bool Monster::canPlay() const
@@ -184,59 +204,54 @@ void Monster::desequipArmor()
     _talisman = new Item();
 }
 
-Item* Monster::getArmor() const
+Item *Monster::getArmor() const
 {
     return _armor;
 }
 
-Item* Monster::getWeapon() const
+Item *Monster::getWeapon() const
 {
     return _weapon;
 }
 
-Item* Monster::getRing1() const
+Item *Monster::getRing1() const
 {
     return _ring1;
 }
 
-Item* Monster::getRing2() const
+Item *Monster::getRing2() const
 {
     return _ring2;
 }
 
-Item* Monster::getTalisman() const
+Item *Monster::getTalisman() const
 {
     return _talisman;
 }
 
 double Monster::getCritRate() const
 {
-    // TODO
-    return 0;
+    return _armor->getCrit() + _weapon->getCrit() + _ring1->getCrit() + _ring2->getCrit() + _talisman->getCrit();
 }
 
 double Monster::getDodgeRate() const
 {
-    // TODO
-    return 0;
+    return _armor->getDodge() + _weapon->getDodge() + _ring1->getDodge() + _ring2->getDodge() + _talisman->getDodge();
 }
 
 double Monster::getComboRate() const
 {
-    // TODO
-    return 0;
+    return _armor->getCombo() + _weapon->getCombo() + _ring1->getCombo() + _ring2->getCombo() + _talisman->getCombo();
 }
 
 double Monster::getStunRate() const
 {
-    // TODO
-    return 0;
+    return _armor->getStun() + _weapon->getStun() + _ring1->getStun() + _ring2->getStun() + _talisman->getStun();
 }
 
 double Monster::getDefenseRate() const
 {
-    // TODO
-    return .1;
+    return (1 - (10000 / (10000 + _armor->getDef() + _weapon->getDef() + _ring1->getDef() + _ring2->getDef() + _talisman->getDef())));
 }
 
 double Monster::getHp() const
@@ -368,6 +383,11 @@ double Monster::getRating() const
     return (_atk + _maxHp / 100 + _speed * 10) / 30;
 }
 
+double Monster::getItemsRating()
+{
+    return _armor->getRating() + _weapon->getRating() + _ring1->getRating() + _ring2->getRating() + _talisman->getRating();
+}
+
 double Monster::getXp() const
 {
     return _xp;
@@ -439,7 +459,7 @@ void Monster::operator=(Monster *const &m)
 
 double Monster::xpForLevel(int level)
 {
-    return 25 * level*level + 25 * level;
+    return 25 * level * level + 25 * level;
 }
 
 Monster::~Monster()

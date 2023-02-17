@@ -159,7 +159,7 @@ int Player::generateTeams()
              { return a->getRating() > b->getRating(); });
 
     int nbTeams = 0;
-    while (nbTankers > 2 && nbDamages > 1 && nbHealers > 1)
+    while (nbTankers >= 2 && nbDamages >= 1 && nbHealers >= 1)
     {
         Team *t = new Team();
         t->addMonster(tankers[0]);

@@ -41,7 +41,7 @@ void TextInterface::log(Fight *f)
     cout << fixed;
     cout << setprecision(2);
 
-    cout << "Attackers (" << f->getAttackersRating() << ") vs Defenders(" << f->getDefendersRating() << ")" << endl;
+    cout << "Attackers (" << f->getAttackersRating() << " & " << f->getAttackers()->getAverageItemsRating() << ") vs Defenders(" << f->getDefendersRating() << " & " << f->getDefenders()->getAverageItemsRating() << ")" << endl;
 
     for (int i = 0; i < 8; i++)
     {
@@ -54,11 +54,12 @@ void TextInterface::log(Monster *m)
 {
     cout << fixed;
     cout << setprecision(2);
-    cout << m->getName() << "[" << m->getId() << "]" << endl;
+    cout << m->getName() << endl;
     cout << "+ Rarity: " << m->getVerboseRarity() << endl;
     cout << "+ Class: " << m->getVerboseType() << endl;
     cout << "+ Overall rating: " << m->getRating() << endl;
     cout << "+ Attack value: " << m->getAttack() << endl;
+    cout << "+ Defense rating: " << m->getDefenseRate() * 100 << "%" << endl; 
     cout << "+ Health points: " << m->getHp() << "/" << m->getMaxHp() << endl;
     cout << "+ Speed: " << m->getSpeed() << endl;
     cout << "+ Stamina: " << m->getStamina() << "/" << m->getMaxStamina() << endl;
@@ -77,15 +78,15 @@ void TextInterface::log(Item *m)
     {
         cout << fixed;
         cout << setprecision(2);
-        cout << "\t" << m->getName() << "[" << m->getId() << "]" << endl;
+        cout << "\t" << m->getName() << endl;
         cout << "\t+ Rarity: " << m->getVerboseRarity() << endl;
         cout << "\t+ Type: " << m->getVerboseType() << endl;
         cout << "\t+ Overall rating: " << m->getRating() << endl;
-        cout << "\t+ Critical rate: " << m->getCrit() << endl;
-        cout << "\t+ Dodge rate: " << m->getDodge() << endl;
-        cout << "\t+ Combo rate: " << m->getCombo() << endl;
-        cout << "\t+ Stun rate: " << m->getStun() << endl;
-        cout << "\t+ Defense rating: " << m->getDef() << endl;
+        cout << "\t+ Critical rate: " << m->getCrit() << "%" << endl;
+        cout << "\t+ Dodge rate: " << m->getDodge() << "%" << endl;
+        cout << "\t+ Combo rate: " << m->getCombo() << "%" << endl;
+        cout << "\t+ Stun rate: " << m->getStun() << "%" << endl;
+        cout << "\t+ Defense value: " << m->getDef() << endl;
         cout << "\t*********************" << endl;
     }
     else

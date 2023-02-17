@@ -39,6 +39,8 @@ protected:
     double _xp;
     int _level;
 
+    bool _stunned;
+
 public:
     Monster();
     Monster(
@@ -61,8 +63,10 @@ public:
     virtual double attack(Monster *target, double bonusStam = 0);
     virtual void prepare(double modifier = 1);
     virtual double receiveDamage(double damage);
+    virtual void stun();
 
     virtual bool isAlive() const;
+    virtual bool isStunned() const;
     virtual bool canPlay() const;
 
     /* MANAGE MONSTER FUNCTIONS */
@@ -113,6 +117,7 @@ public:
     virtual int getTeam() const;
     virtual int getId() const;
     virtual double getRating() const;
+    virtual double getItemsRating();
     virtual double getXp() const;
     virtual int getLevel() const;
 

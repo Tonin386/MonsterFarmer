@@ -79,6 +79,11 @@ double Team::getAverageRating()
     return (_monsters[0]->getRating() + _monsters[1]->getRating() + _monsters[2]->getRating() + _monsters[3]->getRating()) / 4;
 }
 
+double Team::getAverageItemsRating()
+{
+    return (_monsters[0]->getItemsRating() + _monsters[1]->getItemsRating() + _monsters[2]->getItemsRating() + _monsters[3]->getItemsRating()) / 4;
+}
+
 Monster *Team::operator[](int i)
 {
     return _monsters[i % 4];
