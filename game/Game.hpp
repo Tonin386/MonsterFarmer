@@ -57,8 +57,8 @@ public:
 
     virtual void startFight(Team *m1, Team *m2);
 
-    virtual std::vector<Monster *> summonMonsters(int count = 1);
-    virtual std::vector<Item *> obtainItems(int count = 1);
+    virtual std::vector<Monster *> summonMonsters(int count = 1, bool verbose = true);
+    virtual std::vector<Item *> obtainItems(int count = 1, bool verbose = true);
     virtual Team *generateTeam(double level);
 
     ~Game();

@@ -287,7 +287,9 @@ void Game::startFight(Team *attackers, Team *defenders)
     Fight *f = new Fight(attackers, defenders);
     _fights.push_back(f);
 
-    while (f->playTurn()){}
+    while (f->playTurn())
+    {
+    }
 
     TextInterface::log(f);
     double coeff = 0.66;
@@ -307,13 +309,12 @@ void Game::startFight(Team *attackers, Team *defenders)
     (*(f->getAttackers()))[3]->levelUp(xp);
 
     TextInterface::log("Monsters won a total of " + to_string(int(xp)) + "xp for this fight.");
-    
 
     f->getAttackers()->prepareForNextFight();
     TextInterface::clear(5);
 }
 
-vector<Monster *> Game::summonMonsters(int count)
+vector<Monster *> Game::summonMonsters(int count, bool verbose)
 {
     vector<Monster *> legends = getMonsterTemplatesByRarity(5);
     vector<Monster *> epics = getMonsterTemplatesByRarity(4);
@@ -329,38 +330,44 @@ vector<Monster *> Game::summonMonsters(int count)
         int tier = _farm->summonMonster();
         if (tier < 10)
         {
-            TextInterface::log("***** Legendary monster summoned! *****");
+            if (verbose)
+                TextInterface::log("***** Legendary monster summoned! *****");
             m = new Monster(legends[rand() % legends.size()]);
         }
         else if (tier > 10 && tier <= 60)
         {
-            TextInterface::log("**** Epic monster summoned! ****");
+            if (verbose)
+                TextInterface::log("**** Epic monster summoned! ****");
             m = new Monster(epics[rand() % epics.size()]);
         }
         else if (tier > 60 && tier <= 170)
         {
-            TextInterface::log("*** Rare monster summoned! ***");
+            if (verbose)
+                TextInterface::log("*** Rare monster summoned! ***");
             m = new Monster(rares[rand() % rares.size()]);
         }
         else if (tier > 170 && tier <= 400)
         {
-            TextInterface::log("** Uncommon monster summoned! **");
+            if (verbose)
+                TextInterface::log("** Uncommon monster summoned! **");
             m = new Monster(uncommons[rand() % uncommons.size()]);
         }
         else
         {
-            TextInterface::log("* Common monster summoned! *");
+            if (verbose)
+                TextInterface::log("* Common monster summoned! *");
             m = new Monster(commons[rand() % commons.size()]);
         }
 
         monsters.push_back(m);
-        TextInterface::log(m);
+        if (verbose)
+            TextInterface::log(m);
     }
 
     return monsters;
 }
 
-vector<Item *> Game::obtainItems(int count)
+vector<Item *> Game::obtainItems(int count, bool verbose)
 {
     vector<Item *> legends = getItemTemplatesByRarity(5);
     vector<Item *> epics = getItemTemplatesByRarity(4);
@@ -376,32 +383,38 @@ vector<Item *> Game::obtainItems(int count)
         int tier = _farm->obtainItem();
         if (tier < 10)
         {
-            TextInterface::log("***** Legendary Item summoned! *****");
+            if (verbose)
+                TextInterface::log("***** Legendary Item summoned! *****");
             it = new Item(legends[rand() % legends.size()]);
         }
         else if (tier > 10 && tier <= 60)
         {
-            TextInterface::log("**** Epic Item summoned! ****");
+            if (verbose)
+                TextInterface::log("**** Epic Item summoned! ****");
             it = new Item(epics[rand() % epics.size()]);
         }
         else if (tier > 60 && tier <= 170)
         {
-            TextInterface::log("*** Rare Item summoned! ***");
+            if (verbose)
+                TextInterface::log("*** Rare Item summoned! ***");
             it = new Item(rares[rand() % rares.size()]);
         }
         else if (tier > 170 && tier <= 400)
         {
-            TextInterface::log("** Uncommon Item summoned! **");
+            if (verbose)
+                TextInterface::log("** Uncommon Item summoned! **");
             it = new Item(uncommons[rand() % uncommons.size()]);
         }
         else
         {
-            TextInterface::log("* Common Item summoned! *");
+            if (verbose)
+                TextInterface::log("* Common Item summoned! *");
             it = new Item(commons[rand() % commons.size()]);
         }
 
         items.push_back(it);
-        TextInterface::log(it);
+        if (verbose)
+            TextInterface::log(it);
     }
 
     return items;
@@ -424,6 +437,56 @@ Team *Game::generateTeam(double level)
     monsters = getHealersTemplates();
     sizeMonsters = monsters.size();
     Monster *h = new Monster(monsters[rand() % sizeMonsters]);
+
+    vector<Item *> items;
+    int sizeItems;
+
+    items = obtainItems(32, false);
+    sizeItems = items.size();
+
+    for (int i = 0; i < sizeItems; i++)
+    {
+        Monster *m;
+        switch (i)
+        {
+        case 0:
+            m = t1;
+            break;
+        case 1:
+            m = t2;
+            break;
+        case 2:
+            m = d;
+            break;
+        case 3:
+            m = h;
+            break;
+        }
+
+        for(int j = 0; j < sizeItems; j++)
+        {
+            if(items[j]->getType() == Item::ARMOR_TYPE && m->getArmor()->getId() == -1)
+            {
+                m->equipArmor(items[j]);
+            }
+            else if(items[j]->getType() == Item::WEAPON_TYPE && m->getWeapon()->getId() == -1)
+            {
+                m->equipWeapon(items[j]);
+            }
+            else if(items[j]->getType() == Item::RING_TYPE && m->getRing1()->getId() == -1)
+            {
+                m->equipRing1(items[j]);
+            }
+            else if(items[j]->getType() == Item::RING_TYPE && m->getRing2()->getId() == -1)
+            {
+                m->equipRing2(items[j]);                
+            }
+            else if(items[j]->getType() == Item::TALISMAN_TYPE && m->getTalisman()->getId() == -1)
+            {
+                m->equipTalisman(items[j]);               
+            }
+        }
+    }
 
     int level0 = 0;
     int level1 = 0;
