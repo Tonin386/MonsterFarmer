@@ -59,7 +59,7 @@ public:
 
     virtual std::vector<Monster *> summonMonsters(int count = 1);
     virtual std::vector<Item *> obtainItems(int count = 1);
-    virtual Team *generateTeam();
+    virtual Team *generateTeam(double level);
 
     ~Game();
 };

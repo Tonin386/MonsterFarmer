@@ -59,6 +59,8 @@ int Player::generateTeams()
     {
         return 0;
     }
+    
+    deleteTeams();
 
     int nbTankers = 0;
     vector<Monster *> tankers;
@@ -169,7 +171,6 @@ int Player::generateTeams()
 
         if (tankers[0]->getArmor()->getId() == -1 && nbArmors > 0)
         {
-            cout << "Equip armor " << armors[0]->getName() << endl;
             tankers[0]->equipArmor(armors[0]);
             armors.erase(armors.begin());
             nbArmors--;
@@ -331,6 +332,16 @@ int Player::generateTeams()
     return nbTeams;
 }
 
+void Player::deleteTeams()
+{
+    for(auto p : _teams)
+    {
+        delete p;
+    }
+
+    _teams.clear();
+}
+
 void Player::saveState()
 {
     using json = nlohmann::json;
@@ -425,8 +436,5 @@ void Player::setGame(Game *g)
 
 Player::~Player()
 {
-    for (int i = 0; i < _teams.size(); i++)
-    {
-        delete _teams[i];
-    }
+    deleteTeams();
 }

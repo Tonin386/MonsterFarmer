@@ -126,9 +126,11 @@ public:
     virtual void operator=(Monster const &m);
     virtual void operator=(Monster *const &m);
 
+    /* STATIC */
     static const int TANKER = 0;
     static const int DAMAGE = 1;
     static const int HEALER = 2;
+    static double xpForLevel(int level);
 
     ~Monster();
 };

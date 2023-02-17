@@ -275,7 +275,7 @@ int Game::loadActiveItems()
 
         Item *item = new Item(crit_rate, dodge_rate, combo_rate, stun_rate, def_rating, name, type, rarity);
         item->setId(id);
-        addActiveItem(item);
+        _player->addItem(item);
         itemsLoaded++;
     }
 
@@ -287,32 +287,30 @@ void Game::startFight(Team *attackers, Team *defenders)
     Fight *f = new Fight(attackers, defenders);
     _fights.push_back(f);
 
-    TextInterface::log("New fight has started between two teams.");
+    while (f->playTurn()){}
 
-    while (f->playTurn())
-    {
-        // TextInterface::log("Turn ended.");
-    }
     TextInterface::log(f);
-
     double coeff = 0.66;
 
     if (!f->getAttackers()->hasLost())
     {
-        if (rand() % 100 > 75)
-            _player->summonMonsters(1);
+        if (rand() % 101 > 66)
+            _player->summonMonsters(1 + rand() % 2);
         _player->obtainItems(1 + rand() % 3);
         coeff = 1.25;
     }
 
-    double xp = (f->getDefendersRating() / f->getAttackersRating()) * f->getDefendersRating() * 10 * coeff;
+    double xp = std::round(f->getDefendersRating() * 3 * coeff * 100.0) / 100.0;
     (*(f->getAttackers()))[0]->levelUp(xp);
     (*(f->getAttackers()))[1]->levelUp(xp);
     (*(f->getAttackers()))[2]->levelUp(xp);
     (*(f->getAttackers()))[3]->levelUp(xp);
 
+    TextInterface::log("Monsters won a total of " + to_string(int(xp)) + "xp for this fight.");
+    
+
     f->getAttackers()->prepareForNextFight();
-    _player->generateTeams();
+    TextInterface::clear(5);
 }
 
 vector<Monster *> Game::summonMonsters(int count)
@@ -409,7 +407,7 @@ vector<Item *> Game::obtainItems(int count)
     return items;
 }
 
-Team *Game::generateTeam()
+Team *Game::generateTeam(double level)
 {
     vector<Monster *> monsters;
     int sizeMonsters;
@@ -426,6 +424,29 @@ Team *Game::generateTeam()
     monsters = getHealersTemplates();
     sizeMonsters = monsters.size();
     Monster *h = new Monster(monsters[rand() % sizeMonsters]);
+
+    int level0 = 0;
+    int level1 = 0;
+    int level2 = 0;
+    int level3 = 0;
+
+    if (level >= 6)
+    {
+        level0 = level + (1 - (rand() % 7));
+        level1 = level + (1 - (rand() % 7));
+        level2 = level + (1 - (rand() % 7));
+        level3 = level + (1 - (rand() % 7));
+    }
+
+    int xp0 = Monster::xpForLevel(level0);
+    int xp1 = Monster::xpForLevel(level1);
+    int xp2 = Monster::xpForLevel(level2);
+    int xp3 = Monster::xpForLevel(level3);
+
+    t1->levelUp(xp0);
+    t2->levelUp(xp1);
+    d->levelUp(xp2);
+    h->levelUp(xp3);
 
     addActiveMonster(t1);
     addActiveMonster(t2);

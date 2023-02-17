@@ -9,6 +9,9 @@
 #include <iostream>
 #include <iomanip>
 #include <map>
+#include <cstdlib>
+#include <unistd.h>
+#include <stdlib.h>
 
 using namespace std;
 
@@ -27,21 +30,23 @@ void TextInterface::log(Fight *f)
     map<int, int> attacksCount = f->getAttacksCount();
     map<int, double> damageDealt = f->getDamageDealt();
 
+    if (f->hasEnded())
+    {
+        if (attackers->hasLost())
+            cout << "LOSE" << endl;
+        else
+            cout << "WIN" << endl;
+    }
+
     cout << fixed;
     cout << setprecision(2);
+
+    cout << "Attackers (" << f->getAttackersRating() << ") vs Defenders(" << f->getDefendersRating() << ")" << endl;
 
     for (int i = 0; i < 8; i++)
     {
         int id = all[i]->getId();
         cout << all[i]->getName() << " attacked " << attacksCount[id] << " times for a total of " << damageDealt[id] << " of damage done." << endl;
-    }
-
-    if (f->hasEnded())
-    {
-        if (attackers->hasLost())
-            cout << "Attackers lost." << endl;
-        else
-            cout << "Attackers won." << endl;
     }
 }
 
@@ -49,7 +54,7 @@ void TextInterface::log(Monster *m)
 {
     cout << fixed;
     cout << setprecision(2);
-    cout << "Stats for " << m->getName() << "[" << m->getId() << "]" << endl;
+    cout << m->getName() << "[" << m->getId() << "]" << endl;
     cout << "+ Rarity: " << m->getVerboseRarity() << endl;
     cout << "+ Class: " << m->getVerboseType() << endl;
     cout << "+ Overall rating: " << m->getRating() << endl;
@@ -68,11 +73,11 @@ void TextInterface::log(Monster *m)
 
 void TextInterface::log(Item *m)
 {
-    if(m->getType() != '?')
+    if (m->getType() != '?')
     {
         cout << fixed;
         cout << setprecision(2);
-        cout << "\tStats for " << m->getName() << "[" << m->getId() << "]" << endl;
+        cout << "\t" << m->getName() << "[" << m->getId() << "]" << endl;
         cout << "\t+ Rarity: " << m->getVerboseRarity() << endl;
         cout << "\t+ Type: " << m->getVerboseType() << endl;
         cout << "\t+ Overall rating: " << m->getRating() << endl;
@@ -95,6 +100,7 @@ void TextInterface::log(Player *p)
     cout << "List of teams (" << teams.size() << ") of " << p->getName() << endl;
     for (int i = 0; i < teams.size(); i++)
     {
+        cout << "Team " << i+1 << "/" << teams.size() << endl;
         log(teams[i]);
     }
 }
@@ -103,12 +109,19 @@ void TextInterface::log(Team *t)
 {
     cout << "--------------- Beginning of team -----------------" << endl;
 
+    cout << "Average rating: " << t->getAverageRating() << endl;
     for (int i = 0; i < 4; i++)
     {
         log((*t)[i]);
     }
 
     cout << "----------------- End of team -----------------" << endl;
+}
+
+void TextInterface::clear(double seconds)
+{
+    usleep(1000000 * seconds);
+    system("cls");
 }
 
 TextInterface::~TextInterface()

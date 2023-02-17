@@ -395,13 +395,11 @@ bool Monster::operator==(Monster const &m) const
 
 bool Monster::operator<(Monster const &m) const
 {
-    // cout << "Comparing " << _stamina << " < " << m.getStamina() << " Return: " << (_stamina < m.getStamina()) << endl;
     return _stamina < m.getStamina();
 }
 
 bool Monster::operator>(Monster const &m) const
 {
-    // cout << "Comparing " << _stamina << " > " << m.getStamina() << " Return: " << (_stamina > m.getStamina()) << endl;
     return _stamina > m.getStamina();
 }
 
@@ -415,7 +413,11 @@ void Monster::operator=(Monster const &m)
     _stamina = m.getStamina();
     _name = m.getName();
     _rarity = m._rarity;
-    // TODO add items overriding.
+    _armor = m.getArmor();
+    _weapon = m.getWeapon();
+    _ring1 = m.getRing1();
+    _ring2 = m.getRing2();
+    _talisman = m.getTalisman();
 }
 
 void Monster::operator=(Monster *const &m)
@@ -428,7 +430,16 @@ void Monster::operator=(Monster *const &m)
     _stamina = m->getStamina();
     _name = m->getName();
     _rarity = m->_rarity;
-    // TODO add items overriding.
+    _armor = m->getArmor();
+    _weapon = m->getWeapon();
+    _ring1 = m->getRing1();
+    _ring2 = m->getRing2();
+    _talisman = m->getTalisman();
+}
+
+double Monster::xpForLevel(int level)
+{
+    return 25 * level*level + 25 * level;
 }
 
 Monster::~Monster()

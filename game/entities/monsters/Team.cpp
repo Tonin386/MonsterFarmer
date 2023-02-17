@@ -69,6 +69,16 @@ vector<Monster *> Team::getMonsters() const
     return _monsters;
 }
 
+double Team::getAverageLevel()
+{
+    return (_monsters[0]->getLevel() + _monsters[1]->getLevel() + _monsters[2]->getLevel() + _monsters[3]->getLevel()) / 4;
+}
+
+double Team::getAverageRating()
+{
+    return (_monsters[0]->getRating() + _monsters[1]->getRating() + _monsters[2]->getRating() + _monsters[3]->getRating()) / 4;
+}
+
 Monster *Team::operator[](int i)
 {
     return _monsters[i % 4];

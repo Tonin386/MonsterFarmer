@@ -23,6 +23,8 @@ public:
 
     virtual Monster *getMonster(int id) const;
     virtual std::vector<Monster *> getMonsters() const;
+    virtual double getAverageLevel();
+    virtual double getAverageRating();
 
     virtual Monster *operator[](int i);
 

@@ -31,6 +31,7 @@ public:
     virtual void addItem(Item *i);
 
     virtual int generateTeams();
+    virtual void deleteTeams();
     virtual void summonMonsters(int count);
     virtual void obtainItems(int count);
 

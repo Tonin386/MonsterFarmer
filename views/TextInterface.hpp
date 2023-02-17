@@ -22,6 +22,7 @@ public:
     static void log(Fight *f);
     static void log(Player *p);
     static void log(Team *t);
+    static void clear(double seconds = 1);
 
     ~TextInterface();
 };

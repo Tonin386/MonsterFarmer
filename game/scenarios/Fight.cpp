@@ -49,7 +49,6 @@ bool Fight::playTurn()
                     {
                         _attacksCount[id]++;
                         _damageDealt[id] += _all[i]->attack((*_defenders)[j]);
-                        // TextInterface::log(_all[i]->getName() + " attacks " + (*_defenders)[j]->getName());
                         break;
                     }
                 }
@@ -59,7 +58,6 @@ bool Fight::playTurn()
                     {
                         _attacksCount[id]++;
                         _damageDealt[id] += _all[i]->attack((*_attackers)[j]);
-                        // TextInterface::log(_all[i]->getName() + " attacks " + (*_attackers)[j]->getName());
                         break;
                     }
                 }
@@ -67,12 +65,7 @@ bool Fight::playTurn()
         }
         else if (_all[i]->isAlive()) // we must stack stamina to attack.
         {
-            // TextInterface::log(_all[i]->getName() + " prepares. " + to_string(_all[i]->getStamina()) + "+" + to_string(_all[i]->getSpeed()) + "/" + to_string(_all[i]->getMaxStamina()));
             _all[i]->prepare();
-        }
-        else
-        {
-            // TextInterface::log(_all[i]->getName() + " is dead.");
         }
     }
 
