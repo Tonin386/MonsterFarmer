@@ -441,7 +441,7 @@ Team *Game::generateTeam(double level)
     vector<Item *> items;
     int sizeItems;
 
-    items = obtainItems(32, false);
+    items = obtainItems(rand() % 40, false);
     sizeItems = items.size();
 
     for (int i = 0; i < sizeItems; i++)

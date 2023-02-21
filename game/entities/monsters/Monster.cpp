@@ -150,12 +150,9 @@ int Monster::levelUp(double xp)
     int newLevel = floor((sqrt(625 + 100 * _xp) - 25) / 50);
     if (newLevel > _level)
     {
-        for (int i = _level; i < newLevel; i++)
-        {
-            _atk *= (1 + g_atk);
-            _maxHp *= (1 + g_maxHp);
-            _speed *= (1 + g_speed);
-        }
+        _atk = b_atk * (1 + g_atk * newLevel);
+        _maxHp = b_maxHp * (1 + g_maxHp * newLevel);
+        _speed = b_speed * (1 + g_speed * newLevel);
     }
 
     _level = newLevel;
